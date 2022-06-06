@@ -14,12 +14,11 @@ import java.awt.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ExplosionBoxesModule extends Module {
-    HashMap<String, ExplosionBox> explosionBoxes = new HashMap<>() {
-    };
+    HashMap<String, ExplosionBox> explosionBoxes = new HashMap<>();
+
+    HashMap<String, ExplosionBox> toAdd = new HashMap<>();
 
     float minSize = 0.1f;
     float maxSize = 1;
@@ -55,15 +54,7 @@ public class ExplosionBoxesModule extends Module {
     private void endClientTick(MinecraftClient minecraftClient) {
         if (!getEnabled()) return;
 
-        Set<String> toRemove = new HashSet<String>() {
-        };
-        explosionBoxes.forEach((key, box) -> {
-            box.tick();
-            if (box.age > time * 20) {
-                toRemove.add(key);
-            }
-        });
-        toRemove.forEach((key) -> explosionBoxes.remove(key));
+        explosionBoxes.values().forEach(ExplosionBox::tick);
     }
 
     private void lastWorldRender(WorldRenderContext context) {
@@ -86,6 +77,15 @@ public class ExplosionBoxesModule extends Module {
             }
         }
         RenderHelper3d.end(bufferBuilder, context);
+        for (String key : explosionBoxes.keySet().stream().toList()) {
+            if (explosionBoxes.get(key).age > time * 20) {
+                explosionBoxes.remove(key);
+            }
+        }
+        for (String key : toAdd.keySet().stream().toList()) {
+            explosionBoxes.put(key, toAdd.get(key));
+            toAdd.remove(key);
+        }
     }
 
     public void receiveExplosion(Vector3d vector3d) {
@@ -98,7 +98,7 @@ public class ExplosionBoxesModule extends Module {
                 explosionBoxes.get(key).age = 0;
             }
         } else {
-            explosionBoxes.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
+            toAdd.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
         }
 
     }
