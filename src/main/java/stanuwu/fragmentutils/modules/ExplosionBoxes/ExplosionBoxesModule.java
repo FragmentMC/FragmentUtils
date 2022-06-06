@@ -71,15 +71,19 @@ public class ExplosionBoxesModule extends Module {
 
         BufferBuilder bufferBuilder = RenderHelper3d.startQuads();
         for (ExplosionBox box : explosionBoxes.values()) {
-            RenderHelper3d.renderCubeArea(bufferBuilder, box.x - size / 2, box.y - size / 2 + (blockPosition ? 0.44875f : 0), box.z - size / 2, size, new Color((int) red, (int) green, (int) blue, (int) alpha));
-            if (highlightOrigin) {
-                RenderHelper3d.renderCubeArea(bufferBuilder, box.x - 0.025f, box.y - 0.025f, box.z - 0.025f, 0.05f, Color.CYAN);
+            if (box != null) {
+                RenderHelper3d.renderCubeArea(bufferBuilder, box.x - size / 2, box.y - size / 2 + (blockPosition ? 0.44875f : 0), box.z - size / 2, size, new Color((int) red, (int) green, (int) blue, (int) alpha));
+                if (highlightOrigin) {
+                    RenderHelper3d.renderCubeArea(bufferBuilder, box.x - 0.025f, box.y - 0.025f, box.z - 0.025f, 0.05f, Color.CYAN);
+                }
             }
         }
         RenderHelper3d.end(bufferBuilder, context);
         bufferBuilder = RenderHelper3d.startLines();
         for (ExplosionBox box : explosionBoxes.values()) {
-            RenderHelper3d.renderCubeOutline(bufferBuilder, box.x - size / 2, box.y - size / 2 + (blockPosition ? 0.44875f : 0), box.z - size / 2, size, new Color((int) red, (int) green, (int) blue, 255));
+            if (box != null) {
+                RenderHelper3d.renderCubeOutline(bufferBuilder, box.x - size / 2, box.y - size / 2 + (blockPosition ? 0.44875f : 0), box.z - size / 2, size, new Color((int) red, (int) green, (int) blue, 255));
+            }
         }
         RenderHelper3d.end(bufferBuilder, context);
     }
