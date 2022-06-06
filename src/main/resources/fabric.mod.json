@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "fragment_utils",
+  "version": "${version}",
+  "name": "Fragment Utils",
+  "description": "Adds features for the Factions gamemode.",
+  "authors": [
+    "stanuwu"
+  ],
+  "license": "MIT",
+  "icon": "assets/fragment_utils/icon.png",
+  "environment": "client",
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "1.18.2",
+    "fabric-key-binding-api-v1": "*"
+  },
+  "entrypoints": {
+    "client": [
+      "stanuwu.fragmentutils.FragmentUtilsClient"
+    ]
+  },
+  "mixins": [
+    "fragment-utils.mixins.json"
+  ]
+}

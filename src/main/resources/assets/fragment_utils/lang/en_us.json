@@ -1,0 +1,20 @@
+{
+  "key.fragment_utils.menu": "Menu Key",
+  "key.fragment_utils.explosionboxes": "Toggle Explosion Boxes",
+  "category.fragment_utils.factions_utils": "Fragment Utils",
+  "screen.fragment_utils.menu": "Fragment Utils Menu",
+  "screen.fragment_utils.explosionboxes": "Explosion Boxes Menu",
+  "menu.fragment_utils.title": "Fragment Utils",
+  "menu.fragment_utils.description": "made with <3 by stan",
+  "menu.fragment_utils.option.size": "Size",
+  "menu.fragment_utils.option.alive_time": "Alive Time (sec)",
+  "menu.fragment_utils.option.block_position": "Block Position",
+  "menu.fragment_utils.option.highlight_origin": "Highlight Origin",
+  "menu.fragment_utils.option.color": "Color",
+  "module.fragment_utils.name.explosionboxes": "Explosion Boxes",
+  "module.fragment_utils.desc.explosionboxes": "Show explosion locations.",
+  "button.fragment_utils.settings": "Settings",
+  "toggle.fragment_utils.true": "ON",
+  "toggle.fragment_utils.false": "OFF",
+  "toggle.fragment_utils.message": "Toggled %s %s!"
+}
