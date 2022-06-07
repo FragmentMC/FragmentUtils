@@ -15,22 +15,6 @@ public class ExplosionBox {
         age = 0;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
     public void tick() {
         age++;
     }

@@ -89,7 +89,7 @@ public class RoundedTextbox extends Clickable implements Typeable, Draggable, Fo
                 this.selectpos = pos;
             }
         } else {
-            for (int i = 0; i < this.content.length(); i++) {
+            for (int i = 0; i < this.content.length() + 1; i++) {
                 if (mouseX < lengthAtPos(i) + textX) {
                     this.pos = i;
                     if (!dragging) {

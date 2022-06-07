@@ -58,41 +58,41 @@ public class RenderHelper3d {
         final float blue = color.getBlue() / 255f;
         final float alpha = color.getAlpha() / 255f;
 
+        //bottom
+        bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
+
         //top
         bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
 
-        //bottom
-        bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
+        //edge 1
         bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
 
-        //side 1
-        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
-
-        //side 2
+        //edge 2
         bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
 
-        //side 3
+        //edge 3
         bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();
 
-        //side 4
-        bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
-        bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
+        //edge 4
+        bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
     }
 
     public static void renderCubeArea(BufferBuilder bufferBuilder, double x, double y, double z, float size, Color color) {
@@ -101,36 +101,36 @@ public class RenderHelper3d {
         float blue = color.getBlue() / 255f;
         float alpha = color.getAlpha() / 255f;
 
-        //Down
+        //bottom
         bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
 
-        // Up
+        //top
         bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
 
-        // North
+        //side 1
         bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
 
-        // South
+        //side 2
         bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();
-        // East
+        //side 3
         bufferBuilder.vertex(x + size, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y + size, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x + size, y, z + size).color(red, green, blue, alpha).next();
 
-        // West
+        //side 4
         bufferBuilder.vertex(x, y, z).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y, z + size).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x, y + size, z + size).color(red, green, blue, alpha).next();

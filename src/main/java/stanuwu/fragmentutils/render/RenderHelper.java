@@ -96,7 +96,6 @@ public class RenderHelper {
             bufferbuilder.vertex(matrix, xo + width + radius * 2, yo + radius, z).color(color.getRGB()).next();
             end(bufferbuilder);
         }
-
     }
 
     public static void rounded_rect(MatrixStack poseStack, int x, int y, int x2, int y2, float radius, Color color) {

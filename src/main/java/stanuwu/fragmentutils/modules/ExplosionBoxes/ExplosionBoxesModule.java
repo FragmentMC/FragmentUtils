@@ -104,7 +104,7 @@ public class ExplosionBoxesModule extends Module {
     }
 
     String vec3dToString(Vector3d vec3d) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.######");
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
         decimalFormat.setRoundingMode(RoundingMode.FLOOR);
         return new String(new StringBuilder().append(decimalFormat.format(vec3d.x)).append(decimalFormat.format(vec3d.y)).append(decimalFormat.format(vec3d.z)));
     }

@@ -1,5 +1,6 @@
 package stanuwu.fragmentutils.Utils;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class FloatHelper {
@@ -8,7 +9,11 @@ public class FloatHelper {
     }
 
     public static float parseFloatSafe(String string) {
-        Set<Character> allowed = Set.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
+        Set<Character> allowed = new HashSet<>(Set.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
+        if (!StringHelper.containsAny(string, allowed)) {
+            string = "0";
+        }
+        allowed.add('.');
         string = string.replaceAll(",", ".");
         StringBuilder stringBuilder = new StringBuilder();
         for (char c : string.toCharArray()) {

@@ -1,5 +1,7 @@
 package stanuwu.fragmentutils.Utils;
 
+import java.util.Set;
+
 public class StringHelper {
     public static String removeAtIndex(String string, int index) {
         if (index < string.length() && index >= 0) {
@@ -25,5 +27,12 @@ public class StringHelper {
 
     static String outOfBounds(int index, String string) {
         return "Index " + index + " out of bounds for string \"" + string + "\"";
+    }
+
+    static boolean containsAny(String string, Set<Character> set) {
+        for (Character c : set) {
+            if (string.contains(c + "")) return true;
+        }
+        return false;
     }
 }
