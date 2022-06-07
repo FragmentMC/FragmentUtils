@@ -20,42 +20,42 @@ import java.awt.*;
 public class PatchCrumbsScreen extends SubScreen {
     PatchCrumbsModule module = (PatchCrumbsModule) Modules.getModule("patchcrumbs");
 
-    RoundedSlider sizeSlider = new RoundedSlider(105, 15, -85, -30, (sliderValue) -> {
+    RoundedSlider sizeSlider = new RoundedSlider(105, 15, -95, -45, (sliderValue) -> {
         setSize((float) ((double) sliderValue));
     }, module.minSize, module.maxSize, module.size);
 
-    RoundedTextbox sizeBox = new RoundedTextboxSmall(30, 15, 110 - 85, -30, (textboxValue) -> {
+    RoundedTextbox sizeBox = new RoundedTextboxSmall(30, 15, 110 - 95, -45, (textboxValue) -> {
         float res = FloatHelper.parseFloatSafe((String) textboxValue);
         setSize(res);
     }, Float.toString(module.size));
 
-    RoundedSlider timeSlider = new RoundedSlider(105, 15, -85, 5, (sliderValue) -> {
+    RoundedSlider timeSlider = new RoundedSlider(105, 15, -95, -10, (sliderValue) -> {
         setTime((float) ((double) sliderValue));
     }, module.minTime, module.maxTime, module.time);
 
-    RoundedTextbox timeBox = new RoundedTextboxSmall(30, 15, 110 - 85, 5, (textboxValue) -> {
+    RoundedTextbox timeBox = new RoundedTextboxSmall(30, 15, 110 - 95, -10, (textboxValue) -> {
         float res = FloatHelper.parseFloatSafe((String) textboxValue);
         setTime(res);
     }, noDecimalString(module.time));
 
-    RoundedSlider ySlider = new RoundedSlider(105, 15, -85, -20, (sliderValue) -> {
+    RoundedSlider ySlider = new RoundedSlider(105, 15, -95, 25, (sliderValue) -> {
         setYOffset((float) ((double) sliderValue));
     }, module.minOffset, module.maxOffset, module.y_offset);
 
-    RoundedTextbox yBox = new RoundedTextboxSmall(30, 15, 110 - 85, -20, (textboxValue) -> {
+    RoundedTextbox yBox = new RoundedTextboxSmall(30, 15, 110 - 95, 25, (textboxValue) -> {
         float res = FloatHelper.parseFloatSafe((String) textboxValue);
         setYOffset(res);
     }, noDecimalString(module.y_offset));
 
-    final RoundedTextbox redBox = new RoundedTextboxSmall(30, 15, -85, 90, this::acceptRed, noDecimalString(this.module.red));
-    final RoundedTextbox greenBox = new RoundedTextboxSmall(30, 15, -50, 90, this::acceptGreen, noDecimalString(this.module.green));
-    final RoundedTextbox blueBox = new RoundedTextboxSmall(30, 15, -15, 90, this::acceptBlue, noDecimalString(this.module.blue));
-    final RoundedTextbox alphaBox = new RoundedTextboxSmall(30, 15, 20, 90, this::acceptAlpha, noDecimalString(this.module.alpha));
+    final RoundedTextbox redBox = new RoundedTextboxSmall(30, 15, -95, 110, this::acceptRed, noDecimalString(this.module.red));
+    final RoundedTextbox greenBox = new RoundedTextboxSmall(30, 15, -60, 110, this::acceptGreen, noDecimalString(this.module.green));
+    final RoundedTextbox blueBox = new RoundedTextboxSmall(30, 15, -25, 110, this::acceptBlue, noDecimalString(this.module.blue));
+    final RoundedTextbox alphaBox = new RoundedTextboxSmall(30, 15, 10, 110, this::acceptAlpha, noDecimalString(this.module.alpha));
 
     public PatchCrumbsScreen(Text title) {
         super(title);
 
-        components.add(new RoundedSwitch(20, 15, -85, -70, (toggle) -> {
+        components.add(new RoundedSwitch(20, 15, -70, -85, (toggle) -> {
             this.module.toggle();
         }, this.module.getEnabled()));
 
@@ -66,19 +66,19 @@ public class PatchCrumbsScreen extends SubScreen {
         components.add(ySlider);
         components.add(yBox);
 
-        components.add(new RoundedSwitch(15, 10, -85, 31, (toggle) -> {
+        components.add(new RoundedSwitch(15, 10, -95, 51, (toggle) -> {
             this.module.path = !this.module.path;
         }, this.module.path));
 
-        components.add(new RoundedSwitch(15, 10, 0, 31, (toggle) -> {
+        components.add(new RoundedSwitch(15, 10, 10, 51, (toggle) -> {
             this.module.path_sideways = !this.module.path_sideways;
         }, this.module.path_sideways));
 
-        components.add(new RoundedSwitch(15, 10, -85, 56, (toggle) -> {
+        components.add(new RoundedSwitch(15, 10, -95, 76, (toggle) -> {
             this.module.tracers = !this.module.tracers;
         }, this.module.tracers));
 
-        components.add(new RoundedSwitch(15, 10, 0, 56, (toggle) -> {
+        components.add(new RoundedSwitch(15, 10, 10, 76, (toggle) -> {
             this.module.sand = !this.module.sand;
         }, this.module.sand));
 
@@ -155,18 +155,19 @@ public class PatchCrumbsScreen extends SubScreen {
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 115, (int) center.getY() - 100, (int) center.getX() + 105, (int) center.getY() + 140, 7, Theme.getColorSecondary());
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 115 + 5, (int) center.getY() - 100 + 5, (int) center.getX() + 105 - 5, (int) center.getY() + 140 - 5, 5, Theme.getColorTertiary());
 
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 55, (int) center.getY() + 90, (int) center.getX() + 55 + 15, (int) center.getY() + 90 + 15, 7, Color.WHITE);
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 55, (int) center.getY() + 90, (int) center.getX() + 55 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 55, (int) center.getY() + 90, (int) center.getX() + 55 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, Color.WHITE);
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
 
-        Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.patchcrumbs"), center.getX() - 60, center.getY() - 70, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.size"), center.getX() - 85, center.getY() - 45, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.alive_time"), center.getX() - 85, center.getY() - 10, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.path"), center.getX() - 65, center.getY() + 30, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.path_sideways"), center.getX() + 20, center.getY() + 30, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.tracers"), center.getX() - 65, center.getY() + 55, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.sand"), center.getX() + 20, center.getY() + 55, Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.color"), center.getX() - 85, center.getY() + 75, Theme.getColorText().getRGB());
+        Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.patchcrumbs"), center.getX() - 45, center.getY() - 85, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.size"), center.getX() - 95, center.getY() - 60, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.alive_time"), center.getX() - 95, center.getY() - 25, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.y_offset"), center.getX() - 95, center.getY() + 10, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.path"), center.getX() - 75, center.getY() + 50, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.path_sideways"), center.getX() + 30, center.getY() + 50, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.tracers"), center.getX() - 75, center.getY() + 75, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.sand"), center.getX() + 30, center.getY() + 75, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.color"), center.getX() - 95, center.getY() + 95, Theme.getColorText().getRGB());
 
         super.render(matrices, mouseX, mouseY, delta);
     }
