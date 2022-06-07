@@ -13,6 +13,8 @@
   "menu.fragment_utils.option.color": "Color",
   "module.fragment_utils.name.explosionboxes": "Explosion Boxes",
   "module.fragment_utils.desc.explosionboxes": "Show explosion locations.",
+  "module.fragment_utils.name.patchcrumbs": "Patch Crumbs",
+  "module.fragment_utils.desc.patchcrumbs": "Show cannon hit locations.",
   "button.fragment_utils.settings": "Settings",
   "toggle.fragment_utils.true": "ON",
   "toggle.fragment_utils.false": "OFF",

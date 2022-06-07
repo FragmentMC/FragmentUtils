@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector2f;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import stanuwu.fragmentutils.Utils.ColorHelper;
 
@@ -128,5 +129,26 @@ public class RenderHelper {
         int scaledWidth = (int) (width * scale);
         int scaledHeight = (int) (height * scale);
         RenderSystem.enableScissor((int) (x * scale), (int) (windowHeight - (y * scale) - scaledHeight), scaledWidth, scaledHeight);
+    }
+
+    public static void textureFull(int x, int y, float scaleX, float scaleY, Identifier texture) {
+        MatrixStack stack2 = new MatrixStack();
+        RenderSystem.enableTexture();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(770, 771);
+        RenderSystem.setShaderTexture(0, texture);
+        stack2.scale(scaleX, scaleY, 1);
+        Matrix4f matrix = stack2.peek().getPositionMatrix();
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
+        bufferBuilder.vertex(matrix, x, y + 256, 0).texture(0, 1).next();
+        bufferBuilder.vertex(matrix, x + 256, y + 256, 0).texture(1, 1).next();
+        bufferBuilder.vertex(matrix, x + 256, y, 0).texture(1, 0).next();
+        bufferBuilder.vertex(matrix, x, y, 0).texture(0, 0).next();
+        bufferBuilder.end();
+        BufferRenderer.draw(bufferBuilder);
+        RenderSystem.disableTexture();
+        RenderSystem.disableBlend();
     }
 }

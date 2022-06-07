@@ -1,12 +1,11 @@
 package stanuwu.fragmentutils.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import stanuwu.fragmentutils.Utils.LangHelper;
 import stanuwu.fragmentutils.gui.component.ComponentGroup;
+import stanuwu.fragmentutils.render.RenderHelper;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 
 
@@ -52,14 +51,7 @@ public class MenuScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-
-        MatrixStack stack2 = new MatrixStack();
-        Identifier identifier = Theme.getFragmentLogo();
-        RenderSystem.enableTexture();
-        RenderSystem.setShaderTexture(0, identifier);
-        stack2.scale(0.18f, 0.18f, 1);
-        drawTexture(stack2, (int) (width / 0.18 / 2 - 1050), 20, 0, 0, 256, 256);
-        RenderSystem.disableTexture();
+        RenderHelper.textureFull((int) (width / 0.18 / 2 - 1050), 20, 0.18f, 0.18f, Theme.getFragmentLogo());
 
         String title = LangHelper.getTranslated("menu.fragment_utils.title");
         titleFont.drawCenteredStringWithShadow(matrices, title, width / 2f + 30, 0, Theme.getColorTitle().getRGB());
