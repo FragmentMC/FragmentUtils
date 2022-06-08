@@ -10,6 +10,7 @@ import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.render.RenderHelper;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 
+import java.awt.*;
 import java.util.function.Consumer;
 
 public class RoundedTextbox extends Clickable implements Typeable, Draggable, Focusable {
@@ -60,7 +61,9 @@ public class RoundedTextbox extends Clickable implements Typeable, Draggable, Fo
         }
 
         Vector2f center = componentGroup.getCenter();
-        RenderHelper.scaledScissor(x + center.getX() + 2, y + center.getY(), width - 2, height);
+        RenderHelper.scaledScissor(x + center.getX() + 2, y + center.getY(), width - 2, height, componentGroup.screen);
+
+        RenderHelper.rect(poseStack, -2000, -2000, 2000, 2000, Color.RED);
 
         if (selectpos != pos && this.isFocused) {
             float posLength = lengthAtPos(pos) + textX;

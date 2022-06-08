@@ -15,7 +15,9 @@ public class SelectScreen extends MenuScreen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        fillGradient(matrices, 0, 0, width, height, Theme.getColorBackground().getRGB(), Theme.getColorBackgroundSecondary().getRGB());
+        preRender(matrices);
+
+        fillGradient(matrices, 0, 0, scaled(width), scaled(height), Theme.getColorBackground().getRGB(), Theme.getColorBackgroundSecondary().getRGB());
 
         super.render(matrices, mouseX, mouseY, delta);
     }

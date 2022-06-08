@@ -1,13 +1,13 @@
 package stanuwu.fragmentutils.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import stanuwu.fragmentutils.Utils.ColorHelper;
+import stanuwu.fragmentutils.gui.MenuScreen;
 
 import java.awt.*;
 
@@ -121,23 +121,19 @@ public class RenderHelper {
         v_line(poseStack, (int) x, (int) y, (int) x2, (int) y2, width, 0, color);
     }
 
-    public static void scaledScissor(double x, double y, double width, double height) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        int windowHeight = mc.getWindow().getFramebufferHeight();
-        double scale = mc.getWindow().getScaleFactor();
-        int scaledWidth = (int) (width * scale);
-        int scaledHeight = (int) (height * scale);
-        RenderSystem.enableScissor((int) (x * scale), (int) (windowHeight - (y * scale) - scaledHeight), scaledWidth, scaledHeight);
+    public static void scaledScissor(double x, double y, double width, double height, MenuScreen screen) {
+        RenderSystem.enableScissor((int) (x), (int) (screen.getScaledHeight() - (y) - height), (int) screen.scaled(width), (int) screen.scaled(height))
+        ;
     }
 
-    public static void textureFull(int x, int y, float scaleX, float scaleY, Identifier texture) {
-        MatrixStack stack2 = new MatrixStack();
+    public static void textureFull(MatrixStack poseStack, int x, int y, float scaleX, float scaleY, Identifier texture) {
+        poseStack.push();
         RenderSystem.enableTexture();
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(770, 771);
         RenderSystem.setShaderTexture(0, texture);
-        stack2.scale(scaleX, scaleY, 1);
-        Matrix4f matrix = stack2.peek().getPositionMatrix();
+        poseStack.scale(scaleX, scaleY, 1);
+        Matrix4f matrix = poseStack.peek().getPositionMatrix();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
@@ -149,5 +145,6 @@ public class RenderHelper {
         BufferRenderer.draw(bufferBuilder);
         RenderSystem.disableTexture();
         RenderSystem.disableBlend();
+        poseStack.pop();
     }
 }

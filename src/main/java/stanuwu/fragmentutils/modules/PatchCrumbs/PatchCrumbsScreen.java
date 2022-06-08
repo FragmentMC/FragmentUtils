@@ -148,9 +148,11 @@ public class PatchCrumbsScreen extends SubScreen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        preRender(matrices);
+
         Vector2f center = components.getCenter();
 
-        fillGradient(matrices, 0, 0, width, height, Theme.getColorBackground().getRGB(), Theme.getColorBackgroundSecondary().getRGB());
+        fillGradient(matrices, 0, 0, scaled(width), scaled(height), Theme.getColorBackground().getRGB(), Theme.getColorBackgroundSecondary().getRGB());
 
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 115, (int) center.getY() - 100, (int) center.getX() + 105, (int) center.getY() + 140, 7, Theme.getColorSecondary());
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 115 + 5, (int) center.getY() - 100 + 5, (int) center.getX() + 105 - 5, (int) center.getY() + 140 - 5, 5, Theme.getColorTertiary());

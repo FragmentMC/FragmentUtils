@@ -1,22 +1,26 @@
 package stanuwu.fragmentutils.gui.component;
 
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector2f;
+import stanuwu.fragmentutils.gui.MenuScreen;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComponentGroup {
-    public Screen screen;
-    private final List<Clickable> components = new ArrayList<Clickable>();
+    Window window;
+    MenuScreen screen;
+    private final List<Clickable> components = new ArrayList<>();
 
-    public ComponentGroup(Screen screen) {
+    public ComponentGroup(MenuScreen screen) {
+        this.window = MinecraftClient.getInstance().getWindow();
         this.screen = screen;
     }
 
     public Vector2f getCenter() {
-        return new Vector2f(this.screen.width / 2f, this.screen.height / 2f);
+        return new Vector2f(screen.getScaledWidth() / 2f, screen.getScaledHeight() / 2f);
     }
 
     public int count() {
@@ -35,7 +39,8 @@ public class ComponentGroup {
     }
 
     public void renderAll(MatrixStack poseStack, int mouseX, int mouseY) {
-        poseStack.translate(screen.width / 2f, screen.height / 2f, 0);
+        Vector2f center = getCenter();
+        poseStack.translate(center.getX(), center.getY(), 0);
         for (Clickable component : components) {
             component.render(poseStack, mouseX, mouseY, this);
         }
