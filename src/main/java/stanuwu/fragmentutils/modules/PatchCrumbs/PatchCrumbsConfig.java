@@ -10,7 +10,7 @@ import java.util.List;
 public class PatchCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Boolean> on = new SimpleConfigItem<>("on", false);
     public static final ConfigItem<Boolean> path = new SimpleConfigItem<>("path", true);
-    public static final ConfigItem<Boolean> path_sideways = new SimpleConfigItem<>("path_sideways", false);
+    public static final ConfigItem<Boolean> path_sideways = new SimpleConfigItem<>("path_sideways", true);
     public static final ConfigItem<Boolean> tracers = new SimpleConfigItem<>("tracers", false);
     public static final ConfigItem<Boolean> sand = new SimpleConfigItem<>("sand", true);
     public static final ConfigItem<Double> y_offset = new SimpleConfigItem<>("y_offset", 0d);

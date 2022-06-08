@@ -5,14 +5,15 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
+import stanuwu.fragmentutils.Utils.PlayerUtils;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 
@@ -39,7 +40,9 @@ public class PatchCrumbsModule extends Module {
     float alpha;
 
     double dist_thresh = 32;
-    double vel_thresh = 3;
+    double vel_thresh = 1;
+    int fuse_thresh = 70;
+    int new_crumb_delay = 40;
     double alignment_offset = 0.49000000953674316;
     HashMap<Integer, Vec3d> prevPos = new HashMap<>();
     Vec3d crumbs_pos = null;
@@ -74,11 +77,20 @@ public class PatchCrumbsModule extends Module {
         if (crumbs_pos != null && crumbs_age <= time * 20) {
             BufferBuilder bufferBuilder = RenderHelper3d.startLines();
             float dist = MinecraftClient.getInstance().options.viewDistance * 16;
+            Color color = new Color((int) red, (int) green, (int) blue, (int) alpha);
             if (path) {
-                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, crumbs_x, crumbs_pos.x - size / 2, Math.ceil(crumbs_pos.y + y_offset) + size / 2 - 0.44875f, crumbs_pos.z - size / 2, size, dist, new Color((int) red, (int) green, (int) blue, (int) alpha));
+                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z + size / 2, size, dist, color);
             }
             if (path_sideways) {
-                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, !crumbs_x, crumbs_pos.x - size / 2, Math.ceil(crumbs_pos.y + y_offset) - size / 2 - 0.44875f, crumbs_pos.z + size / 2, size, dist, new Color((int) red, (int) green, (int) blue, (int) alpha));
+                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, !crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z - size / 2, size, dist, color);
+                RenderHelper3d.renderCubeOutline(bufferBuilder, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + (1 - size / 2) - 0.5, crumbs_pos.z - size / 2, size, color);
+            }
+            if (tracers) {
+                ClientPlayerEntity player = MinecraftClient.getInstance().player;
+                if (player != null) {
+                    Vec3d screenCenter = PlayerUtils.getInterpolatedPosition().add(0, player.getEyeY() - player.getY(), 0).add(player.getRotationVecClient());
+                    RenderHelper3d.renderLine(bufferBuilder, crumbs_pos.x, Math.round(crumbs_pos.y + y_offset) + size / 2 - 0.44875f, crumbs_pos.z, screenCenter.x, screenCenter.y, screenCenter.z, color);
+                }
             }
             RenderHelper3d.end(bufferBuilder, worldRenderContext);
         }
@@ -106,7 +118,7 @@ public class PatchCrumbsModule extends Module {
             for (Entity entity : client.world.getEntities()) {
                 if (entity instanceof TntEntity || (sand && entity instanceof FallingBlockEntity)) {
                     Vec3d prev = prevPos.getOrDefault(entity.getId(), null);
-                    if (entity.getVelocity().x < vel_thresh && entity.getVelocity().y < vel_thresh) {
+                    if (crumbs_age > new_crumb_delay && entity.getVelocity().x < vel_thresh && entity.getVelocity().y < vel_thresh) {
                         if (prev != null) {
                             if (Math.abs(entity.getX() - prev.x) > dist_thresh) {
                                 setCrumbs(entity.getPos(), true);
@@ -114,7 +126,7 @@ public class PatchCrumbsModule extends Module {
                                 setCrumbs(entity.getPos(), false);
                             }
                         } else {
-                            if (entity.getY() != 0) {
+                            if ((entity.getVelocity().y != 0 && entity.isSubmergedInWater() && (entity instanceof TntEntity ? ((TntEntity) entity).getFuse() < fuse_thresh : false))) {
                                 if (Math.abs(Math.floor(entity.getX()) - entity.getX()) == alignment_offset) {
                                     setCrumbs(new Vec3d(entity.lastRenderX, entity.lastRenderY, entity.lastRenderZ), true);
                                 } else if (Math.abs(Math.floor(entity.getZ()) - entity.getZ()) == alignment_offset) {
@@ -133,10 +145,6 @@ public class PatchCrumbsModule extends Module {
             }
 
         crumbs_age++;
-
-        if (client.player != null) {
-            client.player.sendMessage(new TranslatableText(prevPos.size() + ""), true);
-        }
     }
 
     public boolean getPath() {
