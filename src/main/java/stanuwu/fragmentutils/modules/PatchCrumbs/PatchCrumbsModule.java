@@ -82,7 +82,7 @@ public class PatchCrumbsModule extends Module {
                 RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z + size / 2, size, dist, color);
             }
             if (path_sideways) {
-                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, !crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z - size / 2, size, dist, color);
+                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, !crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z - size / 2 + (crumbs_x ? 0 : 1), size, dist, color);
                 RenderHelper3d.renderCubeOutline(bufferBuilder, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + (1 - size / 2) - 0.5, crumbs_pos.z - size / 2, size, color);
             }
             if (tracers) {
@@ -126,7 +126,7 @@ public class PatchCrumbsModule extends Module {
                                 setCrumbs(entity.getPos(), false);
                             }
                         } else {
-                            if ((entity.getVelocity().y != 0 && entity.isSubmergedInWater() && (entity instanceof TntEntity ? ((TntEntity) entity).getFuse() < fuse_thresh : false))) {
+                            if (entity.isSubmergedInWater() && (entity instanceof TntEntity ? ((TntEntity) entity).getFuse() < fuse_thresh : false)) {
                                 if (Math.abs(Math.floor(entity.getX()) - entity.getX()) == alignment_offset) {
                                     setCrumbs(new Vec3d(entity.lastRenderX, entity.lastRenderY, entity.lastRenderZ), true);
                                 } else if (Math.abs(Math.floor(entity.getZ()) - entity.getZ()) == alignment_offset) {
