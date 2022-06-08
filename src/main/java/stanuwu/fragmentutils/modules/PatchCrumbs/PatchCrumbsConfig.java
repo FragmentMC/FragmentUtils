@@ -18,8 +18,8 @@ public class PatchCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Double> time = new SimpleConfigItem<>("time", 10d);
     public static final ConfigItem<Integer> red = new SimpleConfigItem<>("color.red", 255);
     public static final ConfigItem<Integer> green = new SimpleConfigItem<>("color.green", 0);
-    public static final ConfigItem<Integer> blue = new SimpleConfigItem<>("color.blue", 0);
-    public static final ConfigItem<Integer> alpha = new SimpleConfigItem<>("color.alpha", 50);
+    public static final ConfigItem<Integer> blue = new SimpleConfigItem<>("color.blue", 255);
+    public static final ConfigItem<Integer> alpha = new SimpleConfigItem<>("color.alpha", 255);
 
     public PatchCrumbsConfig() {
         super(List.of(on, path, path_sideways, tracers, sand, y_offset, size, time, red, green, blue, alpha), "patchcrumbs");

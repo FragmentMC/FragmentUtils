@@ -1,10 +1,12 @@
 package stanuwu.fragmentutils.modules.PatchCrumbs;
 
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
@@ -15,18 +17,14 @@ import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 
 import java.awt.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class PatchCrumbsModule extends Module {
     boolean path;
     boolean path_sideways;
     boolean tracers;
     boolean sand;
-    float minOffset = 0;
+    float minOffset = -10;
     float maxOffset = 10;
     float y_offset;
     float minTime = 1;
@@ -40,8 +38,10 @@ public class PatchCrumbsModule extends Module {
     float blue;
     float alpha;
 
-    double vel_thresh = 50;
-    HashMap<String, TrackedEntity> tracked = new HashMap<>();
+    double dist_thresh = 32;
+    double vel_thresh = 3;
+    double alignment_offset = 0.49000000953674316;
+    HashMap<Integer, Vec3d> prevPos = new HashMap<>();
     Vec3d crumbs_pos = null;
     boolean crumbs_x = true;
     int crumbs_age = 0;
@@ -65,6 +65,7 @@ public class PatchCrumbsModule extends Module {
 
         ClientTickEvents.END_CLIENT_TICK.register(this::endTick);
         WorldRenderEvents.LAST.register(this::lastWorldRender);
+        ClientEntityEvents.ENTITY_UNLOAD.register(this::entityUnload);
     }
 
     private void lastWorldRender(WorldRenderContext worldRenderContext) {
@@ -72,61 +73,70 @@ public class PatchCrumbsModule extends Module {
 
         if (crumbs_pos != null && crumbs_age <= time * 20) {
             BufferBuilder bufferBuilder = RenderHelper3d.startLines();
-            RenderHelper3d.renderCubeOutline(bufferBuilder, crumbs_pos.x - size / 2, crumbs_pos.y - size / 2, crumbs_pos.z - size / 2, size, new Color(red, green, blue, alpha));
+            float dist = MinecraftClient.getInstance().options.viewDistance * 16;
+            if (path) {
+                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, crumbs_x, crumbs_pos.x - size / 2, Math.ceil(crumbs_pos.y + y_offset) + size / 2 - 0.44875f, crumbs_pos.z - size / 2, size, dist, new Color((int) red, (int) green, (int) blue, (int) alpha));
+            }
+            if (path_sideways) {
+                RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, !crumbs_x, crumbs_pos.x - size / 2, Math.ceil(crumbs_pos.y + y_offset) - size / 2 - 0.44875f, crumbs_pos.z + size / 2, size, dist, new Color((int) red, (int) green, (int) blue, (int) alpha));
+            }
             RenderHelper3d.end(bufferBuilder, worldRenderContext);
         }
+    }
+
+    private void entityUnload(Entity entity, ClientWorld clientWorld) {
+        if (!getEnabled()) return;
+
+        if (entity instanceof TntEntity || entity instanceof FallingBlockEntity) {
+            prevPos.remove(entity.getId());
+        }
+    }
+
+    private void setCrumbs(Vec3d pos, boolean x) {
+        crumbs_pos = pos;
+        crumbs_age = 0;
+        crumbs_x = x;
     }
 
     private void endTick(MinecraftClient minecraftClient) {
         if (!getEnabled()) return;
         MinecraftClient client = MinecraftClient.getInstance();
 
-        int entities = 0;
-
         if (client.world != null)
             for (Entity entity : client.world.getEntities()) {
-                if (entity instanceof TntEntity || (sand && entity instanceof FallingBlockEntity)) entities++;
+                if (entity instanceof TntEntity || (sand && entity instanceof FallingBlockEntity)) {
+                    Vec3d prev = prevPos.getOrDefault(entity.getId(), null);
+                    if (entity.getVelocity().x < vel_thresh && entity.getVelocity().y < vel_thresh) {
+                        if (prev != null) {
+                            if (Math.abs(entity.getX() - prev.x) > dist_thresh) {
+                                setCrumbs(entity.getPos(), true);
+                            } else if (Math.abs(entity.getZ() - prev.z) > dist_thresh) {
+                                setCrumbs(entity.getPos(), false);
+                            }
+                        } else {
+                            if (entity.getY() != 0) {
+                                if (Math.abs(Math.floor(entity.getX()) - entity.getX()) == alignment_offset) {
+                                    setCrumbs(new Vec3d(entity.lastRenderX, entity.lastRenderY, entity.lastRenderZ), true);
+                                } else if (Math.abs(Math.floor(entity.getZ()) - entity.getZ()) == alignment_offset) {
+                                    setCrumbs(new Vec3d(entity.lastRenderX, entity.lastRenderY, entity.lastRenderZ), false);
+                                }
+                            }
+                        }
+                    }
 
-                if (entity.getVelocity().x > vel_thresh) {
-                    String key = entityToKey(entity);
-                    tracked.putIfAbsent(key, new TrackedEntity(entity, true, entity.getX()));
-                } else if (entity.getVelocity().y > vel_thresh) {
-                    String key = entityToKey(entity);
-                    tracked.putIfAbsent(key, new TrackedEntity(entity, false, entity.getZ()));
+                    if (prevPos.containsKey(entity.getId())) {
+                        prevPos.replace(entity.getId(), new Vec3d(entity.getX(), entity.getY(), entity.getZ()));
+                    } else {
+                        prevPos.put(entity.getId(), new Vec3d(entity.getX(), entity.getY(), entity.getZ()));
+                    }
                 }
             }
 
         crumbs_age++;
 
-        List<String> expired = new ArrayList<>();
-        tracked.forEach((key, trackedEntity) -> {
-            if (trackedEntity.entity == null) {
-                expired.add(key);
-            } else if ((trackedEntity.x ? trackedEntity.entity.getVelocity().x : trackedEntity.entity.getVelocity().z) < 1) {
-                crumbs_pos = trackedEntity.entity.getPos();
-                crumbs_age = 0;
-                crumbs_x = trackedEntity.x;
-            }
-        });
-
-        expired.forEach(tracked::remove);
-
         if (client.player != null) {
-            client.player.sendMessage(new TranslatableText(Integer.toString(entities)), true);
+            client.player.sendMessage(new TranslatableText(prevPos.size() + ""), true);
         }
-    }
-
-    String entityToKey(Entity entity) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.###");
-        decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-        return new String(new StringBuilder()
-                .append(decimalFormat.format(entity.getX()))
-                .append(decimalFormat.format(entity.getY()))
-                .append(decimalFormat.format(entity.getZ()))
-                .append(decimalFormat.format(entity.getVelocity().x))
-                .append(decimalFormat.format(entity.getVelocity().y))
-                .append(decimalFormat.format(entity.getVelocity().z))
-        );
     }
 
     public boolean getPath() {

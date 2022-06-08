@@ -158,8 +158,8 @@ public class PatchCrumbsScreen extends SubScreen {
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 115 + 5, (int) center.getY() - 100 + 5, (int) center.getX() + 105 - 5, (int) center.getY() + 140 - 5, 5, Theme.getColorTertiary());
 
         RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, Color.WHITE);
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.green, (int) module.blue, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 45, (int) center.getY() + 110, (int) center.getX() + 45 + 15, (int) center.getY() + 110 + 15, 7, new Color((int) module.red, (int) module.green, (int) module.blue, (int) module.alpha));
 
         Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.patchcrumbs"), center.getX() - 45, center.getY() - 85, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.size"), center.getX() - 95, center.getY() - 60, Theme.getColorText().getRGB());

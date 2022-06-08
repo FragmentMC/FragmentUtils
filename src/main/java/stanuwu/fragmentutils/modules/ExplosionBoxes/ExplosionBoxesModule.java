@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 public class ExplosionBoxesModule extends Module {
     HashMap<String, ExplosionBox> explosionBoxes = new HashMap<>();
-
     HashMap<String, ExplosionBox> toAdd = new HashMap<>();
 
     float minSize = 0.1f;
@@ -82,7 +81,9 @@ public class ExplosionBoxesModule extends Module {
                 explosionBoxes.remove(key);
             }
         }
-        for (String key : toAdd.keySet().stream().toList()) {
+
+        for (int i = 0; i < toAdd.size(); i++) {
+            String key = (String) toAdd.keySet().toArray()[i];
             explosionBoxes.put(key, toAdd.get(key));
             toAdd.remove(key);
         }
@@ -100,7 +101,6 @@ public class ExplosionBoxesModule extends Module {
         } else {
             toAdd.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
         }
-
     }
 
     String vec3dToString(Vector3d vec3d) {
