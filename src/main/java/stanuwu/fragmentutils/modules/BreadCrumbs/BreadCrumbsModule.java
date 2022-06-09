@@ -120,18 +120,18 @@ public class BreadCrumbsModule extends Module {
                         if (delta.x != 0 && delta.y != 0) {
                             boolean sure = false;
                             boolean xSmaller = false;
-                            if (!entity.horizontalCollision) {
+                            if (!entity.horizontalCollision && delta.x != delta.z) {
                                 xSmaller = delta.x < delta.y;
                                 sure = true;
                             }
 
                             if (sure) {
                                 if (xSmaller) {
-                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, color));
-                                    addLine(new BreadCrumbLine(pos.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, color));
-                                } else {
                                     addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, prev.x, pos.y, pos.z, 0, color));
                                     addLine(new BreadCrumbLine(prev.x, pos.y, pos.z, pos.x, pos.y, pos.z, 0, color));
+                                } else {
+                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, color));
+                                    addLine(new BreadCrumbLine(pos.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, color));
                                 }
                             } else {
                                 addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, color));
