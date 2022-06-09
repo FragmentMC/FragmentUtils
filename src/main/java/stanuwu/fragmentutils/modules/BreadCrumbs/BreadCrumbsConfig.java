@@ -9,17 +9,17 @@ import java.util.List;
 
 public class BreadCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Boolean> on = new SimpleConfigItem<>("on", false);
-    public static final ConfigItem<Double> time = new SimpleConfigItem<>("time", 10d);
+    public static final ConfigItem<Double> time = new SimpleConfigItem<>("time", 20d);
     public static final ConfigItem<Boolean> tnt = new SimpleConfigItem<>("tnt", true);
     public static final ConfigItem<Boolean> sand = new SimpleConfigItem<>("sand", true);
-    public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("tnt_color.red", 255);
-    public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("tnt_color.green", 0);
-    public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("tnt_color.blue", 0);
-    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("tnt_color.alpha", 50);
+    public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("tnt_color.red", 0);
+    public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("tnt_color.green", 255);
+    public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("tnt_color.blue", 125);
+    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("tnt_color.alpha", 255);
     public static final ConfigItem<Integer> sand_red = new SimpleConfigItem<>("sand_color.red", 255);
     public static final ConfigItem<Integer> sand_green = new SimpleConfigItem<>("sand_color.green", 0);
-    public static final ConfigItem<Integer> sand_blue = new SimpleConfigItem<>("sand_color.blue", 0);
-    public static final ConfigItem<Integer> sand_alpha = new SimpleConfigItem<>("sand_color.alpha", 50);
+    public static final ConfigItem<Integer> sand_blue = new SimpleConfigItem<>("sand_color.blue", 255);
+    public static final ConfigItem<Integer> sand_alpha = new SimpleConfigItem<>("sand_color.alpha", 255);
 
     public BreadCrumbsConfig() {
         super(List.of(on, time, tnt, sand, tnt_red, tnt_green, tnt_blue, tnt_alpha, sand_red, sand_green, sand_blue, sand_alpha), "breadcrumbs");

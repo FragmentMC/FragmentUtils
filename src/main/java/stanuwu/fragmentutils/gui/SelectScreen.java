@@ -9,8 +9,9 @@ public class SelectScreen extends MenuScreen {
     protected SelectScreen(Text title) {
         super(title);
 
-        components.add(new RoundedModuleCard(-70, 0, Modules.getModule("explosionboxes")));
-        components.add(new RoundedModuleCard(70, 0, Modules.getModule("patchcrumbs")));
+        components.add(new RoundedModuleCard(-70, -35, Modules.getModule("explosionboxes")));
+        components.add(new RoundedModuleCard(70, -35, Modules.getModule("patchcrumbs")));
+        components.add(new RoundedModuleCard(-70, 35, Modules.getModule("breadcrumbs")));
     }
 
     @Override
