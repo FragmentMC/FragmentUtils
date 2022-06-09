@@ -53,6 +53,8 @@ public class BreadCrumbsModule extends Module {
     }
 
     private void lastWorldRender(WorldRenderContext worldRenderContext) {
+        if (!getEnabled()) return;
+
         BufferBuilder bufferBuilder = RenderHelper3d.startLines();
         for (BreadCrumbLine breadCrumbLine : crumbs.stream().toList()) {
             if (breadCrumbLine != null) {
@@ -67,6 +69,8 @@ public class BreadCrumbsModule extends Module {
     }
 
     private void endTick(MinecraftClient minecraftClient) {
+        if (!getEnabled()) return;
+
         ClientWorld clientWorld = minecraftClient.world;
         if (clientWorld != null) {
             clientWorld.getEntities().forEach((entity -> {
@@ -79,6 +83,8 @@ public class BreadCrumbsModule extends Module {
                 }
             }));
         }
+
+        crumbs.stream().toList().forEach((crumb) -> crumb.age++);
 
         ClientPlayerEntity player = minecraftClient.player;
         if (player != null) {
