@@ -27,32 +27,32 @@ public class PatchCrumbsConfig extends ConfigItemGroup {
 
     public static PatchCrumbsModule fromConfig() {
         return new PatchCrumbsModule(
-                PatchCrumbsConfig.on.getValue(),
-                PatchCrumbsConfig.path.getValue(),
-                PatchCrumbsConfig.path_sideways.getValue(),
-                PatchCrumbsConfig.tracers.getValue(),
-                PatchCrumbsConfig.sand.getValue(),
-                FloatHelper.toFloat(PatchCrumbsConfig.y_offset.getValue()),
-                FloatHelper.toFloat(PatchCrumbsConfig.size.getValue()),
-                FloatHelper.toFloat(PatchCrumbsConfig.time.getValue()),
-                PatchCrumbsConfig.red.getValue(),
-                PatchCrumbsConfig.green.getValue(),
-                PatchCrumbsConfig.blue.getValue(),
-                PatchCrumbsConfig.alpha.getValue());
+                on.getValue(),
+                path.getValue(),
+                path_sideways.getValue(),
+                tracers.getValue(),
+                sand.getValue(),
+                FloatHelper.toFloat(y_offset.getValue()),
+                FloatHelper.toFloat(size.getValue()),
+                FloatHelper.toFloat(time.getValue()),
+                red.getValue(),
+                green.getValue(),
+                blue.getValue(),
+                alpha.getValue());
     }
 
     public static void saveConfig(PatchCrumbsModule module) {
-        PatchCrumbsConfig.on.setValue(module.getEnabled());
-        PatchCrumbsConfig.path.setValue(module.getPath());
-        PatchCrumbsConfig.path_sideways.setValue(module.getPath_sideways());
-        PatchCrumbsConfig.tracers.setValue(module.getTracers());
-        PatchCrumbsConfig.sand.setValue(module.getSand());
-        PatchCrumbsConfig.y_offset.setValue((double) module.getY_offset());
-        PatchCrumbsConfig.size.setValue((double) module.getSize());
-        PatchCrumbsConfig.time.setValue((double) module.getTime());
-        PatchCrumbsConfig.red.setValue((int) module.getRed());
-        PatchCrumbsConfig.green.setValue((int) module.getGreen());
-        PatchCrumbsConfig.blue.setValue((int) module.getBlue());
-        PatchCrumbsConfig.alpha.setValue((int) module.getAlpha());
+        on.setValue(module.getEnabled());
+        path.setValue(module.getPath());
+        path_sideways.setValue(module.getPath_sideways());
+        tracers.setValue(module.getTracers());
+        sand.setValue(module.getSand());
+        y_offset.setValue((double) module.getY_offset());
+        size.setValue((double) module.getSize());
+        time.setValue((double) module.getTime());
+        red.setValue((int) module.getRed());
+        green.setValue((int) module.getGreen());
+        blue.setValue((int) module.getBlue());
+        alpha.setValue((int) module.getAlpha());
     }
 }

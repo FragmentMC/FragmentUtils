@@ -25,27 +25,27 @@ public class ExplosionBoxesConfig extends ConfigItemGroup {
 
     public static ExplosionBoxesModule fromConfig() {
         return new ExplosionBoxesModule(
-                ExplosionBoxesConfig.on.getValue(),
-                FloatHelper.toFloat(ExplosionBoxesConfig.size.getValue()),
-                FloatHelper.toFloat(ExplosionBoxesConfig.time.getValue()),
-                ExplosionBoxesConfig.blockPosition.getValue(),
-                ExplosionBoxesConfig.highlightOrigin.getValue(),
+                on.getValue(),
+                FloatHelper.toFloat(size.getValue()),
+                FloatHelper.toFloat(time.getValue()),
+                blockPosition.getValue(),
+                highlightOrigin.getValue(),
                 new Color(
-                        ExplosionBoxesConfig.red.getValue(),
-                        ExplosionBoxesConfig.green.getValue(),
-                        ExplosionBoxesConfig.blue.getValue(),
-                        ExplosionBoxesConfig.alpha.getValue()));
+                        red.getValue(),
+                        green.getValue(),
+                        blue.getValue(),
+                        alpha.getValue()));
     }
 
     public static void saveConfig(ExplosionBoxesModule module) {
-        ExplosionBoxesConfig.on.setValue(module.getEnabled());
-        ExplosionBoxesConfig.size.setValue((double) module.getSize());
-        ExplosionBoxesConfig.time.setValue((double) module.getTime());
-        ExplosionBoxesConfig.blockPosition.setValue(module.getBlockPosition());
-        ExplosionBoxesConfig.highlightOrigin.setValue(module.getHighlightOrigin());
-        ExplosionBoxesConfig.red.setValue((int) module.getRed());
-        ExplosionBoxesConfig.green.setValue((int) module.getGreen());
-        ExplosionBoxesConfig.blue.setValue((int) module.getBlue());
-        ExplosionBoxesConfig.alpha.setValue((int) module.getAlpha());
+        on.setValue(module.getEnabled());
+        size.setValue((double) module.getSize());
+        time.setValue((double) module.getTime());
+        blockPosition.setValue(module.getBlockPosition());
+        highlightOrigin.setValue(module.getHighlightOrigin());
+        red.setValue((int) module.getRed());
+        green.setValue((int) module.getGreen());
+        blue.setValue((int) module.getBlue());
+        alpha.setValue((int) module.getAlpha());
     }
 }
