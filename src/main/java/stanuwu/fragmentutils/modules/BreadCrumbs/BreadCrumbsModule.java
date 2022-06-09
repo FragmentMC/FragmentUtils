@@ -10,6 +10,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
@@ -76,10 +77,32 @@ public class BreadCrumbsModule extends Module {
             clientWorld.getEntities().forEach((entity -> {
                 if (entity instanceof TntEntity && tnt) {
                     Color color = new Color((int) tnt_red, (int) tnt_green, (int) tnt_blue, (int) tnt_alpha);
-                    crumbs.add(new BreadCrumbLine(entity.getX(), entity.getY(), entity.getZ(), entity.getX(), entity.getY() + entity.getVelocity().getY(), entity.getZ(), 0, color));
+                    Vec3d vel = entity.getVelocity();
+                    double x1 = entity.getX();
+                    double y1 = entity.getY();
+                    double z1 = entity.getZ();
+                    double x2 = x1 + vel.getX();
+                    double y2 = y1 + vel.getY() - (vel.getY() == 0.0 ? 0.0 : 0.04d);
+                    double z2 = z1 + vel.getZ();
+                    boolean xSmaller = Math.abs(entity.getVelocity().getX()) < Math.abs(entity.getVelocity().getZ());
+                    if (vel.getY() != 0.0) {
+                        crumbs.add(new BreadCrumbLine(x1, y1, z1, x1, y2, z1, 0, color));
+                    }
+                    if (xSmaller && vel.getZ() != 0.0) {
+                        crumbs.add(new BreadCrumbLine(x1, y2, z1, x1, y2, z2, 0, color));
+                        if (entity.getVelocity().getX() != 0.0) {
+                            crumbs.add(new BreadCrumbLine(x1, y2, z2, x2, y2, z2, 0, color));
+                        }
+                    }
+                    if (vel.getX() != 0.0) {
+                        crumbs.add(new BreadCrumbLine(x1, y2, z1, x2, y2, z1, 0, color));
+                        if (!xSmaller && vel.getX() != 0.0) {
+                            crumbs.add(new BreadCrumbLine(x2, y2, z1, x2, y2, z2, 0, color));
+                        }
+                    }
                 } else if (entity instanceof FallingBlockEntity && sand) {
                     Color color = new Color((int) sand_red, (int) sand_green, (int) sand_blue, (int) sand_alpha);
-                    crumbs.add(new BreadCrumbLine(entity.getX(), entity.getY(), entity.getZ(), entity.getX(), entity.getY() + entity.getVelocity().getY(), entity.getZ(), 0, color));
+                    crumbs.add(new BreadCrumbLine(entity.getX(), entity.getY(), entity.getZ(), entity.getX(), entity.getY() + entity.getVelocity().getY() - 0.04d, entity.getZ(), 0, color));
                 }
             }));
         }

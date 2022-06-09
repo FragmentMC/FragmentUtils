@@ -145,12 +145,12 @@ public class BreadCrumbsScreen extends SubScreen {
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 95 + 5, (int) center.getY() - 90 + 5, (int) center.getX() + 95 - 5, (int) center.getY() + 125 - 5, 5, Theme.getColorTertiary());
 
         RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 60, (int) center.getX() + 65 + 15, (int) center.getY() + 60 + 15, 7, Color.WHITE);
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 60, (int) center.getX() + 65 + 15, (int) center.getY() + 60 + 15, 7, new Color((int) module.tnt_red, (int) module.tnt_blue, (int) module.tnt_green, (int) module.tnt_alpha));
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 60, (int) center.getX() + 65 + 15, (int) center.getY() + 60 + 15, 7, new Color((int) module.tnt_red, (int) module.tnt_blue, (int) module.tnt_green, (int) module.tnt_alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 60, (int) center.getX() + 65 + 15, (int) center.getY() + 60 + 15, 7, new Color((int) module.tnt_red, (int) module.tnt_green, (int) module.tnt_blue, (int) module.tnt_alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 60, (int) center.getX() + 65 + 15, (int) center.getY() + 60 + 15, 7, new Color((int) module.tnt_red, (int) module.tnt_green, (int) module.tnt_blue, (int) module.tnt_alpha));
 
         RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 95, (int) center.getX() + 65 + 15, (int) center.getY() + 95 + 15, 7, Color.WHITE);
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 95, (int) center.getX() + 65 + 15, (int) center.getY() + 95 + 15, 7, new Color((int) module.sand_red, (int) module.sand_blue, (int) module.sand_green, (int) module.sand_alpha));
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 95, (int) center.getX() + 65 + 15, (int) center.getY() + 95 + 15, 7, new Color((int) module.sand_red, (int) module.sand_blue, (int) module.sand_green, (int) module.sand_alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 95, (int) center.getX() + 65 + 15, (int) center.getY() + 95 + 15, 7, new Color((int) module.sand_red, (int) module.sand_green, (int) module.sand_blue, (int) module.sand_alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 95, (int) center.getX() + 65 + 15, (int) center.getY() + 95 + 15, 7, new Color((int) module.sand_red, (int) module.sand_green, (int) module.sand_blue, (int) module.sand_alpha));
 
         Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.breadcrumbs"), center.getX() - 40, center.getY() - 70, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.alive_time"), center.getX() - 75, center.getY() - 45, Theme.getColorText().getRGB());
