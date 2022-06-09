@@ -6,11 +6,11 @@ import net.minecraft.client.util.math.Vector2f;
 import org.lwjgl.glfw.GLFW;
 import stanuwu.fragmentutils.Utils.ColorHelper;
 import stanuwu.fragmentutils.Utils.StringHelper;
+import stanuwu.fragmentutils.gui.MenuScreen;
 import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.render.RenderHelper;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 
-import java.awt.*;
 import java.util.function.Consumer;
 
 public class RoundedTextbox extends Clickable implements Typeable, Draggable, Focusable {
@@ -61,9 +61,8 @@ public class RoundedTextbox extends Clickable implements Typeable, Draggable, Fo
         }
 
         Vector2f center = componentGroup.getCenter();
-        RenderHelper.scaledScissor(x + center.getX() + 2, y + center.getY(), width - 2, height, componentGroup.screen);
-
-        RenderHelper.rect(poseStack, -2000, -2000, 2000, 2000, Color.RED);
+        MenuScreen screen = componentGroup.screen;
+        RenderSystem.enableScissor((int) (x + center.getX() + 1) * 2, (int) (screen.getScaledHeight() - (y + center.getY())) * 2 - height * 2, width * 2 - 4, height * 2);
 
         if (selectpos != pos && this.isFocused) {
             float posLength = lengthAtPos(pos) + textX;

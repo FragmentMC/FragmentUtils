@@ -14,6 +14,7 @@ public class FloatHelper {
             string = "0";
         }
         allowed.add('.');
+        allowed.add('-');
         string = string.replaceAll(",", ".");
         StringBuilder stringBuilder = new StringBuilder();
         for (char c : string.toCharArray()) {

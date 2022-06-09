@@ -52,6 +52,44 @@ public class RenderHelper3d {
         RenderSystem.enableCull();
     }
 
+    public static void renderLine(BufferBuilder bufferBuilder, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
+        final float red = color.getRed() / 255f;
+        final float green = color.getGreen() / 255f;
+        final float blue = color.getBlue() / 255f;
+        final float alpha = color.getAlpha() / 255f;
+
+        bufferBuilder.vertex(x1, y1, z1).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x2, y2, z2).color(red, green, blue, alpha).next();
+    }
+
+    public static void renderInfiniteQuadLines(BufferBuilder bufferBuilder, boolean x_axis, double x, double y, double z, float size, float dist, Color color) {
+        final float red = color.getRed() / 255f;
+        final float green = color.getGreen() / 255f;
+        final float blue = color.getBlue() / 255f;
+        final float alpha = color.getAlpha() / 255f;
+
+        float dist2 = 0;
+        float size2 = 0;
+        if (!x_axis) {
+            dist2 = dist;
+            dist = 0;
+            size2 = size;
+            size = 0;
+        }
+
+        bufferBuilder.vertex(x - dist, y, z - dist2).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + dist, y, z + dist2).color(red, green, blue, alpha).next();
+
+        bufferBuilder.vertex(x + size2 - dist, y, z - size - dist2).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size2 + dist, y, z - size + dist2).color(red, green, blue, alpha).next();
+
+        bufferBuilder.vertex(x - dist, y - size - size2, z - dist2).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + dist, y - size - size2, z + dist2).color(red, green, blue, alpha).next();
+
+        bufferBuilder.vertex(x + size2 - dist, y - size - size2, z - size - dist2).color(red, green, blue, alpha).next();
+        bufferBuilder.vertex(x + size2 + dist, y - size - size2, z - size + dist2).color(red, green, blue, alpha).next();
+    }
+
     public static void renderCubeOutline(BufferBuilder bufferBuilder, double x, double y, double z, float size, Color color) {
         final float red = color.getRed() / 255f;
         final float green = color.getGreen() / 255f;

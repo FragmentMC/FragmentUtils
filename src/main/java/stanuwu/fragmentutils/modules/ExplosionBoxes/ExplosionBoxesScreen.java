@@ -131,8 +131,8 @@ public class ExplosionBoxesScreen extends SubScreen {
         RenderHelper.rounded_rect(matrices, (int) center.getX() - 95 + 5, (int) center.getY() - 85 + 5, (int) center.getX() + 95 - 5, (int) center.getY() + 120 - 5, 5, Theme.getColorTertiary());
 
         RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 90, (int) center.getX() + 65 + 15, (int) center.getY() + 90 + 15, 7, Color.WHITE);
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 90, (int) center.getX() + 65 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
-        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 90, (int) center.getX() + 65 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.blue, (int) module.green, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 90, (int) center.getX() + 65 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.green, (int) module.blue, (int) module.alpha));
+        RenderHelper.rounded_rect(matrices, (int) center.getX() + 65, (int) center.getY() + 90, (int) center.getX() + 65 + 15, (int) center.getY() + 90 + 15, 7, new Color((int) module.red, (int) module.green, (int) module.blue, (int) module.alpha));
 
         Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.explosionboxes"), center.getX() - 50, center.getY() - 70, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.size"), center.getX() - 75, center.getY() - 45, Theme.getColorText().getRGB());

@@ -1,6 +1,7 @@
 {
   "key.fragment_utils.menu": "Menu Key",
   "key.fragment_utils.explosionboxes": "Toggle Explosion Boxes",
+  "key.fragment_utils.patchcrumbs": "Toggle Patch Crumbs",
   "category.fragment_utils.factions_utils": "Fragment Utils",
   "screen.fragment_utils.menu": "Fragment Utils Menu",
   "screen.fragment_utils.explosionboxes": "Explosion Boxes Menu",

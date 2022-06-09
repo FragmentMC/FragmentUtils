@@ -10,7 +10,7 @@ import java.util.List;
 public class PatchCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Boolean> on = new SimpleConfigItem<>("on", false);
     public static final ConfigItem<Boolean> path = new SimpleConfigItem<>("path", true);
-    public static final ConfigItem<Boolean> path_sideways = new SimpleConfigItem<>("path_sideways", false);
+    public static final ConfigItem<Boolean> path_sideways = new SimpleConfigItem<>("path_sideways", true);
     public static final ConfigItem<Boolean> tracers = new SimpleConfigItem<>("tracers", false);
     public static final ConfigItem<Boolean> sand = new SimpleConfigItem<>("sand", true);
     public static final ConfigItem<Double> y_offset = new SimpleConfigItem<>("y_offset", 0d);
@@ -18,8 +18,8 @@ public class PatchCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Double> time = new SimpleConfigItem<>("time", 10d);
     public static final ConfigItem<Integer> red = new SimpleConfigItem<>("color.red", 255);
     public static final ConfigItem<Integer> green = new SimpleConfigItem<>("color.green", 0);
-    public static final ConfigItem<Integer> blue = new SimpleConfigItem<>("color.blue", 0);
-    public static final ConfigItem<Integer> alpha = new SimpleConfigItem<>("color.alpha", 50);
+    public static final ConfigItem<Integer> blue = new SimpleConfigItem<>("color.blue", 255);
+    public static final ConfigItem<Integer> alpha = new SimpleConfigItem<>("color.alpha", 255);
 
     public PatchCrumbsConfig() {
         super(List.of(on, path, path_sideways, tracers, sand, y_offset, size, time, red, green, blue, alpha), "patchcrumbs");

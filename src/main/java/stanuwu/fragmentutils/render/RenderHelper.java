@@ -7,7 +7,6 @@ import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import stanuwu.fragmentutils.Utils.ColorHelper;
-import stanuwu.fragmentutils.gui.MenuScreen;
 
 import java.awt.*;
 
@@ -119,11 +118,6 @@ public class RenderHelper {
 
     public static void v_line(MatrixStack poseStack, float x, float y, float x2, float y2, int width, Color color) {
         v_line(poseStack, (int) x, (int) y, (int) x2, (int) y2, width, 0, color);
-    }
-
-    public static void scaledScissor(double x, double y, double width, double height, MenuScreen screen) {
-        RenderSystem.enableScissor((int) (x), (int) (screen.getScaledHeight() - (y) - height), (int) screen.scaled(width), (int) screen.scaled(height))
-        ;
     }
 
     public static void textureFull(MatrixStack poseStack, int x, int y, float scaleX, float scaleY, Identifier texture) {
