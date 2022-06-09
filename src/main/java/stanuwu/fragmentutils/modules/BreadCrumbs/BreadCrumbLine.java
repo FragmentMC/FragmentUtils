@@ -49,4 +49,17 @@ public class BreadCrumbLine {
             return false;
         }
     }
+
+    public String getKey() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        return new String(new StringBuilder()
+                .append(decimalFormat.format(x1))
+                .append(decimalFormat.format(y1))
+                .append(decimalFormat.format(z1))
+                .append(decimalFormat.format(x2))
+                .append(decimalFormat.format(y2))
+                .append(decimalFormat.format(z2))
+                .append(color.getRGB())
+        );
+    }
 }

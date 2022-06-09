@@ -53,9 +53,13 @@ public class BreadCrumbsScreen extends SubScreen {
             this.module.tnt = !this.module.tnt;
         }, this.module.tnt));
 
-        components.add(new RoundedSwitch(15, 10, -75, 26, (toggle) -> {
+        components.add(new RoundedSwitch(15, 10, -10, 1, (toggle) -> {
             this.module.sand = !this.module.sand;
         }, this.module.sand));
+
+        components.add(new RoundedSwitch(15, 10, -75, 26, (toggle) -> {
+            this.module.triangle = !this.module.triangle;
+        }, this.module.triangle));
 
         components.add(redTntBox);
         components.add(greenTntBox);
@@ -155,7 +159,8 @@ public class BreadCrumbsScreen extends SubScreen {
         Theme.getSubFont().drawString(matrices, LangHelper.getTranslated("module.fragment_utils.name.breadcrumbs"), center.getX() - 40, center.getY() - 70, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.alive_time"), center.getX() - 75, center.getY() - 45, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.track_tnt"), center.getX() - 55, center.getY(), Theme.getColorText().getRGB());
-        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.track_sand"), center.getX() - 55, center.getY() + 25, Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.track_sand"), center.getX() + 10, center.getY(), Theme.getColorText().getRGB());
+        Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.triangle"), center.getX() - 55, center.getY() + 25, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.tnt_color"), center.getX() - 75, center.getY() + 45, Theme.getColorText().getRGB());
         Theme.getButtonFont().drawString(matrices, LangHelper.getTranslated("menu.fragment_utils.option.sand_color"), center.getX() - 75, center.getY() + 80, Theme.getColorText().getRGB());
 

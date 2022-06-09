@@ -82,10 +82,12 @@ public class ExplosionBoxesModule extends Module {
             }
         }
 
-        for (int i = 0; i < toAdd.size(); i++) {
+        int itsize = toAdd.size();
+        for (int i = 0; i < itsize; i++) {
             String key = (String) toAdd.keySet().toArray()[i];
             explosionBoxes.put(key, toAdd.get(key));
             toAdd.remove(key);
+            itsize = toAdd.size();
         }
     }
 

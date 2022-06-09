@@ -12,6 +12,7 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Double> time = new SimpleConfigItem<>("time", 20d);
     public static final ConfigItem<Boolean> tnt = new SimpleConfigItem<>("tnt", true);
     public static final ConfigItem<Boolean> sand = new SimpleConfigItem<>("sand", true);
+    public static final ConfigItem<Boolean> triangle = new SimpleConfigItem<>("triangle", false);
     public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("tnt_color.red", 0);
     public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("tnt_color.green", 255);
     public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("tnt_color.blue", 255);
@@ -22,7 +23,7 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Integer> sand_alpha = new SimpleConfigItem<>("sand_color.alpha", 255);
 
     public BreadCrumbsConfig() {
-        super(List.of(on, time, tnt, sand, tnt_red, tnt_green, tnt_blue, tnt_alpha, sand_red, sand_green, sand_blue, sand_alpha), "breadcrumbs");
+        super(List.of(on, time, tnt, sand, triangle, tnt_red, tnt_green, tnt_blue, tnt_alpha, sand_red, sand_green, sand_blue, sand_alpha), "breadcrumbs");
     }
 
     public static BreadCrumbsModule fromConfig() {
@@ -31,6 +32,7 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
                 FloatHelper.toFloat(time.getValue()),
                 tnt.getValue(),
                 sand.getValue(),
+                triangle.getValue(),
                 tnt_red.getValue(),
                 tnt_green.getValue(),
                 tnt_blue.getValue(),
@@ -47,6 +49,7 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
         time.setValue((double) module.time);
         tnt.setValue(module.tnt);
         sand.setValue(module.sand);
+        triangle.setValue(module.triangle);
         tnt_red.setValue((int) module.tnt_red);
         tnt_green.setValue((int) module.tnt_green);
         tnt_blue.setValue((int) module.tnt_blue);
