@@ -3,10 +3,9 @@
   "minVersion": "0.8",
   "package": "stanuwu.fragmentutils.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
   "client": [
-    "ClientPlayNetworkExplosionMixin"
+    "ClientPlayNetworkExplosionMixin",
+    "InGameHudRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

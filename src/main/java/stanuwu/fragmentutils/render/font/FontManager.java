@@ -46,7 +46,7 @@ public class FontManager {
             for (int size : new int[]{20, 24, 32}) {
                 this.createNewFont("Roboto", "Roboto", size, executor, textureQueue);
             }
-            for (int size : new int[]{92}) {
+            for (int size : new int[]{64, 92}) {
                 this.createNewFont("Righteous", "Righteous", size, executor, textureQueue);
             }
         } catch (Exception ex) {

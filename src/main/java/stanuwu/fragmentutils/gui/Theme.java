@@ -7,22 +7,28 @@ import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 import java.awt.*;
 
 public class Theme {
-    private static Color colorTitle = new Color(255, 255, 0, 255);
-    private static Color colorPrimary = new Color(150, 150, 150, 255);
-    private static Color colorSecondary = new Color(0, 255, 255, 255);
-    private static Color colorTertiary = new Color(100, 100, 100, 255);
-    private static Color colorHover = new Color(135, 135, 135, 255);
-    private static Color colorHoverSecondary = new Color(0, 215, 215, 255);
-    private static Color colorInactive = new Color(100, 100, 100, 255);
-    private static Color colorText = new Color(215, 215, 215, 255);
-    private static Color colorBackground = new Color(0, 0, 0, 150);
-    private static Color colorBackgroundSecondary = new Color(45, 0, 60, 150);
-    private static Color colorOverlay = new Color(0, 0, 0, 30);
-    private static TTFFontRenderer titleFont = Fonts.fontManager.getFont("Righteous 92");
-    private static TTFFontRenderer descFont = Fonts.fontManager.getFont("Roboto 20");
-    private static TTFFontRenderer buttonFont = Fonts.fontManager.getFont("Roboto 24");
-    private static TTFFontRenderer subFont = Fonts.fontManager.getFont("Roboto 32");
-    private static Identifier fragmentLogo = new Identifier("fragment_utils", "icon/fragment_r_lowres.png");
+    private static final Color colorTitle = new Color(255, 255, 0, 255);
+    private static final Color colorPrimary = new Color(150, 150, 150, 255);
+    private static final Color colorSecondary = new Color(0, 255, 255, 255);
+    private static final Color colorTertiary = new Color(100, 100, 100, 255);
+    private static final Color colorHover = new Color(135, 135, 135, 255);
+    private static final Color colorHoverSecondary = new Color(0, 215, 215, 255);
+    private static final Color colorInactive = new Color(100, 100, 100, 255);
+    private static final Color colorText = new Color(215, 215, 215, 255);
+    private static final Color colorBackground = new Color(0, 0, 0, 150);
+    private static final Color colorBackgroundSecondary = new Color(45, 0, 60, 150);
+    private static final Color colorOverlay = new Color(0, 0, 0, 30);
+    private static final Color colorHudOverlayOff = new Color(255, 0, 0, 100);
+    private static final Color colorHudOverlayOn = new Color(0, 255, 0, 100);
+    private static final Color colorHudOverlayOffHover = new Color(255, 0, 0, 150);
+    private static final Color colorHudOverlayOnHover = new Color(0, 255, 0, 150);
+    private static final TTFFontRenderer titleFont = Fonts.fontManager.getFont("Righteous 92");
+    private static final TTFFontRenderer hudTitleFont = Fonts.fontManager.getFont("Righteous 64");
+    private static final TTFFontRenderer hudSubFont = Fonts.fontManager.getFont("Roboto 24");
+    private static final TTFFontRenderer descFont = Fonts.fontManager.getFont("Roboto 20");
+    private static final TTFFontRenderer buttonFont = Fonts.fontManager.getFont("Roboto 24");
+    private static final TTFFontRenderer subFont = Fonts.fontManager.getFont("Roboto 32");
+    private static final Identifier fragmentLogo = new Identifier("fragment_utils", "icon/fragment_r_lowres.png");
 
     public static Color getColorTitle() {
         return colorTitle;
@@ -68,8 +74,32 @@ public class Theme {
         return colorOverlay;
     }
 
+    public static Color getColorHudOverlayOff() {
+        return colorHudOverlayOff;
+    }
+
+    public static Color getColorHudOverlayOn() {
+        return colorHudOverlayOn;
+    }
+
+    public static Color getColorHudOverlayOffHover() {
+        return colorHudOverlayOffHover;
+    }
+
+    public static Color getColorHudOverlayOnHover() {
+        return colorHudOverlayOnHover;
+    }
+
     public static TTFFontRenderer getTitleFont() {
         return titleFont;
+    }
+
+    public static TTFFontRenderer getHudTitleFont() {
+        return hudTitleFont;
+    }
+
+    public static TTFFontRenderer getHudSubFont() {
+        return hudSubFont;
     }
 
     public static TTFFontRenderer getDescFont() {

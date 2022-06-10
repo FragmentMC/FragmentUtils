@@ -13,7 +13,7 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
-import stanuwu.fragmentutils.Utils.PlayerUtils;
+import stanuwu.fragmentutils.Utils.PlayerHelper;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 
@@ -88,7 +88,7 @@ public class PatchCrumbsModule extends Module {
             if (tracers) {
                 ClientPlayerEntity player = MinecraftClient.getInstance().player;
                 if (player != null) {
-                    Vec3d screenCenter = PlayerUtils.getInterpolatedPosition().add(0, player.getEyeY() - player.getY(), 0).add(player.getRotationVecClient());
+                    Vec3d screenCenter = PlayerHelper.getInterpolatedPosition().add(0, player.getEyeY() - player.getY(), 0).add(player.getRotationVecClient());
                     RenderHelper3d.renderLine(bufferBuilder, crumbs_pos.x, Math.round(crumbs_pos.y + y_offset) + size / 2 - 0.44875f, crumbs_pos.z, screenCenter.x, screenCenter.y, screenCenter.z, color);
                 }
             }

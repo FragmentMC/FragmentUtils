@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import org.lwjgl.glfw.GLFW;
 import stanuwu.fragmentutils.Utils.LangHelper;
 import stanuwu.fragmentutils.gui.component.ComponentGroup;
 import stanuwu.fragmentutils.render.RenderHelper;
@@ -27,23 +28,28 @@ public class MenuScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        mouseX = scaled(mouseX);
-        mouseY = scaled(mouseY);
-        components.clickAll((int) mouseX, (int) mouseY);
+        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+            components.clickAll((int) scaled(mouseX), (int) scaled(mouseY));
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        components.stopDragAll();
+        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+            components.stopDragAll();
+        }
+
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-        mouseX = scaled(mouseX);
-        mouseY = scaled(mouseY);
-        components.dragAll(mouseX, mouseY);
+        if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+            components.dragAll(scaled(mouseX), scaled(mouseY));
+        }
+
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 

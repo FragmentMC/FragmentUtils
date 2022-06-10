@@ -12,6 +12,7 @@ public class SelectScreen extends MenuScreen {
         components.add(new RoundedModuleCard(-70, -35, Modules.getModule("explosionboxes")));
         components.add(new RoundedModuleCard(70, -35, Modules.getModule("patchcrumbs")));
         components.add(new RoundedModuleCard(-70, 35, Modules.getModule("breadcrumbs")));
+        components.add(new RoundedModuleCard(70, 35, Modules.getModule("hud")));
     }
 
     @Override

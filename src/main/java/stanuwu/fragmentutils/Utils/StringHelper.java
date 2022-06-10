@@ -35,4 +35,8 @@ public class StringHelper {
         }
         return false;
     }
+
+    public static String toCamelCase(String string) {
+        return (string.charAt(0) + "".toUpperCase()) + string.substring(1).toLowerCase();
+    }
 }
