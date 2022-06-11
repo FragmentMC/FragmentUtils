@@ -13,14 +13,14 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Boolean> tnt = new SimpleConfigItem<>("tnt", true);
     public static final ConfigItem<Boolean> sand = new SimpleConfigItem<>("sand", true);
     public static final ConfigItem<Boolean> triangle = new SimpleConfigItem<>("triangle", false);
-    public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("tnt_color.red", 0);
-    public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("tnt_color.green", 255);
-    public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("tnt_color.blue", 255);
-    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("tnt_color.alpha", 125);
-    public static final ConfigItem<Integer> sand_red = new SimpleConfigItem<>("sand_color.red", 255);
-    public static final ConfigItem<Integer> sand_green = new SimpleConfigItem<>("sand_color.green", 255);
-    public static final ConfigItem<Integer> sand_blue = new SimpleConfigItem<>("sand_color.blue", 0);
-    public static final ConfigItem<Integer> sand_alpha = new SimpleConfigItem<>("sand_color.alpha", 255);
+    public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("color.tnt.red", 0);
+    public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("color.tnt.green", 255);
+    public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("color.tnt.blue", 255);
+    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("color.tnt.alpha", 125);
+    public static final ConfigItem<Integer> sand_red = new SimpleConfigItem<>("color.sand.red", 255);
+    public static final ConfigItem<Integer> sand_green = new SimpleConfigItem<>("color.sand.green", 255);
+    public static final ConfigItem<Integer> sand_blue = new SimpleConfigItem<>("color.sand.blue", 0);
+    public static final ConfigItem<Integer> sand_alpha = new SimpleConfigItem<>("color.sand.alpha", 255);
 
     public BreadCrumbsConfig() {
         super(List.of(on, time, tnt, sand, triangle, tnt_red, tnt_green, tnt_blue, tnt_alpha, sand_red, sand_green, sand_blue, sand_alpha), "breadcrumbs");

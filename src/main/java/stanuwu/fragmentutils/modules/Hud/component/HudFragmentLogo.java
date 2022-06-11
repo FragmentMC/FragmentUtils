@@ -7,7 +7,7 @@ import stanuwu.fragmentutils.render.RenderHelper;
 public class HudFragmentLogo extends HudComponent {
     private float scale = 0.15f;
 
-    public HudFragmentLogo(boolean enabled, double x, double y, int id) {
+    public HudFragmentLogo(boolean enabled, double x, double y, String id) {
         super(enabled, x, y, id);
     }
 

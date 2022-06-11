@@ -1,16 +1,14 @@
 package stanuwu.fragmentutils.modules.Hud.component;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
-import stanuwu.fragmentutils.Utils.StringHelper;
 import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 
-public class HudFacingText extends HudComponent {
+public class HudFpsText extends HudComponent {
     private final String invalid = "N/A";
 
-    public HudFacingText(boolean enabled, double x, double y, String id) {
+    public HudFpsText(boolean enabled, double x, double y, String id) {
         super(enabled, x, y, id);
     }
 
@@ -25,9 +23,9 @@ public class HudFacingText extends HudComponent {
     }
 
     private double getRealWidth() {
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (player != null) {
-            return Theme.getHudSubFont().getWidth("Facing: " + StringHelper.toCamelCase(player.getHorizontalFacing().name())) + 2;
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client != null) {
+            return Theme.getHudSubFont().getWidth("FPS: " + getFps(client)) + 2;
         }
         return Theme.getHudSubFont().getWidth(invalid);
     }
@@ -36,16 +34,20 @@ public class HudFacingText extends HudComponent {
         return x < 0.5;
     }
 
+    private String getFps(MinecraftClient client) {
+        return client.fpsDebugString.split(" ")[0];
+    }
+
     @Override
     public void render(MatrixStack poseStack, double mouseX, double mouseY, boolean menu) {
         TTFFontRenderer font = Theme.getHudSubFont();
-        double xAdd = leftAlign() ? 0 : getWidth() - getRealWidth();
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (player != null) {
-            String text = "Facing: ";
+        double xAdd = leftAlign() ? 1 : getWidth() - getRealWidth();
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client != null) {
+            String text = "FPS: ";
             font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
             xAdd += font.getWidth(text);
-            text = StringHelper.toCamelCase(player.getHorizontalFacing().name());
+            text = getFps(client);
             font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getSecondaryColor().getRGB());
         } else {
             font.drawString(poseStack, invalid, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
@@ -54,4 +56,3 @@ public class HudFacingText extends HudComponent {
         super.render(poseStack, mouseX, mouseY, menu);
     }
 }
-

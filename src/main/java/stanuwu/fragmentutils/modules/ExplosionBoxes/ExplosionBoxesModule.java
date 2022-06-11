@@ -6,7 +6,12 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.util.math.Vector3d;
+import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import org.lwjgl.glfw.GLFW;
+import stanuwu.fragmentutils.events.EventHandler;
+import stanuwu.fragmentutils.events.EventType;
+import stanuwu.fragmentutils.events.events.Event;
+import stanuwu.fragmentutils.events.events.ReceivePacketEvent;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 
@@ -48,6 +53,7 @@ public class ExplosionBoxesModule extends Module {
 
         WorldRenderEvents.LAST.register(this::lastWorldRender);
         ClientTickEvents.END_CLIENT_TICK.register(this::endClientTick);
+        EventHandler.getInstance().register(EventType.ReceivePacket, this::receiveExplosion);
     }
 
     private void endClientTick(MinecraftClient minecraftClient) {
@@ -91,17 +97,22 @@ public class ExplosionBoxesModule extends Module {
         }
     }
 
-    public void receiveExplosion(Vector3d vector3d) {
+    public void receiveExplosion(Event e) {
         if (!getEnabled()) return;
 
-        String key = vec3dToString(vector3d);
+        ReceivePacketEvent event = (ReceivePacketEvent) e;
+        if (event.getPacket() instanceof ExplosionS2CPacket) {
+            ExplosionS2CPacket ePacket = (ExplosionS2CPacket) event.getPacket();
+            Vector3d vector3d = new Vector3d(ePacket.getX(), ePacket.getY(), ePacket.getZ());
+            String key = vec3dToString(vector3d);
 
-        if (explosionBoxes.containsKey(key)) {
-            if (explosionBoxes.get(key).age != 0) {
-                explosionBoxes.get(key).age = 0;
+            if (explosionBoxes.containsKey(key)) {
+                if (explosionBoxes.get(key).age != 0) {
+                    explosionBoxes.get(key).age = 0;
+                }
+            } else {
+                toAdd.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
             }
-        } else {
-            toAdd.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
         }
     }
 

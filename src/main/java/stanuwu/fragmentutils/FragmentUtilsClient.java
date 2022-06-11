@@ -7,6 +7,7 @@ import stanuwu.fragmentutils.config.FragmentUtilsConfig;
 import stanuwu.fragmentutils.keybinds.Keybinds;
 import stanuwu.fragmentutils.modules.Modules;
 import stanuwu.fragmentutils.render.font.Fonts;
+import stanuwu.fragmentutils.trackers.Trackers;
 
 public class FragmentUtilsClient implements ClientModInitializer {
     public static FragmentUtilsConfig conf;
@@ -16,6 +17,9 @@ public class FragmentUtilsClient implements ClientModInitializer {
         //initialize config
         conf = new FragmentUtilsConfig();
         conf.readConfigFromFile();
+
+        //initialize trackers
+        Trackers.init();
 
         //initialize modules
         Modules.initModules();

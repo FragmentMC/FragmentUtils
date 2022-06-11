@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 public class HudCoordinateText extends HudComponent {
     private String invalid = "N/A";
 
-    public HudCoordinateText(boolean enabled, double x, double y, int id) {
+    public HudCoordinateText(boolean enabled, double x, double y, String id) {
         super(enabled, x, y, id);
     }
 
@@ -35,7 +35,7 @@ public class HudCoordinateText extends HudComponent {
             width += font.getWidth(numToString(player.getZ()));
             return width + 1;
         }
-        return 0;
+        return Theme.getHudSubFont().getWidth(invalid);
     }
 
     private String numToString(double num) {
@@ -55,28 +55,28 @@ public class HudCoordinateText extends HudComponent {
         if (player != null) {
             //x
             String text = "X: ";
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorTitle().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
             xAdd += font.getWidth(text);
             text = numToString(player.getX());
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorText().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getSecondaryColor().getRGB());
             xAdd += font.getWidth(text);
 
             //y
             text = "  Y: ";
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorTitle().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
             xAdd += font.getWidth(text);
             text = numToString(player.getY());
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorText().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getSecondaryColor().getRGB());
             xAdd += font.getWidth(text);
 
             //z
             text = "  Z: ";
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorTitle().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
             xAdd += font.getWidth(text);
             text = numToString(player.getZ());
-            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), Theme.getColorText().getRGB());
+            font.drawString(poseStack, text, (float) (dX() + xAdd), (float) dY(), getModule().getSecondaryColor().getRGB());
         } else {
-            font.drawString(poseStack, invalid, (float) (dX() + xAdd), (float) dY(), Theme.getColorTitle().getRGB());
+            font.drawString(poseStack, invalid, (float) (dX() + xAdd), (float) dY(), getModule().getPrimaryColor().getRGB());
         }
 
         super.render(poseStack, mouseX, mouseY, menu);

@@ -34,8 +34,8 @@ public class RoundedModuleCard extends Toggleable implements Initializeable {
         click = true;
     }
 
-    public void onClick(double mouseX, double mouseY, ComponentGroup componentGroup) {
-        if (!button.isHovering(mouseX, mouseY, componentGroup)) {
+    public void onClick(double mouseX, double mouseY, ComponentGroup componentGroup, boolean invalidHover) {
+        if (!button.isHovering(mouseX, mouseY, componentGroup) && !invalidHover) {
             super.onClick();
         }
     }
@@ -47,7 +47,11 @@ public class RoundedModuleCard extends Toggleable implements Initializeable {
 
     @Override
     public void render(MatrixStack poseStack, int mouseX, int mouseY, ComponentGroup componentGroup) {
-        Color color = isHovering(mouseX, mouseY, componentGroup) && !button.isHovering(mouseX, mouseY, componentGroup) ?
+        render(poseStack, mouseX, mouseY, componentGroup, false);
+    }
+
+    public void render(MatrixStack poseStack, int mouseX, int mouseY, ComponentGroup componentGroup, boolean invalidHover) {
+        Color color = isHovering(mouseX, mouseY, componentGroup) && !button.isHovering(mouseX, mouseY, componentGroup) && !invalidHover ?
                 (!active ? Theme.getColorHover() : Theme.getColorHoverSecondary()) :
                 (!active ? Theme.getColorPrimary() : Theme.getColorSecondary());
         RenderHelper.rounded_rect(poseStack, x, y, x + width, y + height, 7, color);
@@ -57,7 +61,7 @@ public class RoundedModuleCard extends Toggleable implements Initializeable {
 
         if (click) {
             click = false;
-            onClick(mouseX, mouseY, componentGroup);
+            onClick(mouseX, mouseY, componentGroup, invalidHover);
         }
     }
 }

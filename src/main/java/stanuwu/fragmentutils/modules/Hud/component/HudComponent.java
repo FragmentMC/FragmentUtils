@@ -6,6 +6,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import stanuwu.fragmentutils.Utils.ScaleHelper;
 import stanuwu.fragmentutils.gui.Theme;
+import stanuwu.fragmentutils.modules.Hud.HudModule;
+import stanuwu.fragmentutils.modules.Modules;
 import stanuwu.fragmentutils.render.RenderHelper;
 
 import java.awt.*;
@@ -15,13 +17,21 @@ public abstract class HudComponent {
     private boolean dragged = false;
     protected double x;
     protected double y;
-    int id;
+    String id;
+    HudModule module = null;
 
-    public HudComponent(boolean enabled, double x, double y, int id) {
+    public HudComponent(boolean enabled, double x, double y, String id) {
         this.enabled = enabled;
         this.x = x;
         this.y = y;
         this.id = id;
+    }
+
+    protected HudModule getModule() {
+        if (this.module == null) {
+            this.module = (HudModule) Modules.getModule("hud");
+        }
+        return this.module;
     }
 
     protected Window getWindow() {
@@ -71,24 +81,28 @@ public abstract class HudComponent {
 
     public abstract double getHeight();
 
-    public void drag(double mouseX, double mouseY, double deltaX, double deltaY) {
+    public boolean drag(double mouseX, double mouseY, double deltaX, double deltaY) {
         if (isHovering(mouseX, mouseY)) {
             this.x = MathHelper.clamp(x + sX(deltaX), 0, 1);
             this.y = MathHelper.clamp(y + sY(deltaY), 0, 1);
             dragged = true;
+            return true;
         }
+        return false;
     }
 
     public boolean isHovering(double mouseX, double mouseY) {
         return mouseX > dX() && mouseX < dX() + getWidth() && mouseY > this.dY() && mouseY < this.dY() + getHeight();
     }
 
-    public void click(double mouseX, double mouseY) {
+    public boolean click(double mouseX, double mouseY) {
         if (isHovering(mouseX, mouseY) && !dragged) {
             enabled = !enabled;
+            return true;
         } else {
             dragged = false;
         }
+        return false;
     }
 
     public boolean isEnabled() {
@@ -103,7 +117,7 @@ public abstract class HudComponent {
         return y;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
