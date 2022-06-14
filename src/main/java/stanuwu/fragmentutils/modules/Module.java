@@ -6,7 +6,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import stanuwu.fragmentutils.Utils.LangHelper;
+import stanuwu.fragmentutils.utils.LangHelper;
 import stanuwu.fragmentutils.gui.SubScreen;
 
 public class Module {

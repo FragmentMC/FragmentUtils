@@ -2,7 +2,7 @@ package stanuwu.fragmentutils.gui.component;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
-import stanuwu.fragmentutils.Utils.LangHelper;
+import stanuwu.fragmentutils.utils.LangHelper;
 import stanuwu.fragmentutils.gui.SubScreen;
 import stanuwu.fragmentutils.modules.Module;
 

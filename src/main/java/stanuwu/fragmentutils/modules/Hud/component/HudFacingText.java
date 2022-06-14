@@ -3,7 +3,7 @@ package stanuwu.fragmentutils.modules.Hud.component;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
-import stanuwu.fragmentutils.Utils.StringHelper;
+import stanuwu.fragmentutils.utils.StringHelper;
 import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;
 

@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import stanuwu.fragmentutils.Utils.ScaleHelper;
+import stanuwu.fragmentutils.utils.ScaleHelper;
 import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.modules.Hud.HudModule;
 import stanuwu.fragmentutils.modules.Modules;

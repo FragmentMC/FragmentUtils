@@ -6,7 +6,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
-import stanuwu.fragmentutils.Utils.ColorHelper;
+import stanuwu.fragmentutils.utils.ColorHelper;
 
 import java.awt.*;
 

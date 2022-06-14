@@ -1,4 +1,4 @@
-package stanuwu.fragmentutils.Utils;
+package stanuwu.fragmentutils.utils;
 
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;

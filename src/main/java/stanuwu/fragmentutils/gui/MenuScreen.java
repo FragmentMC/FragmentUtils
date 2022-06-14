@@ -6,7 +6,7 @@ import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
-import stanuwu.fragmentutils.Utils.LangHelper;
+import stanuwu.fragmentutils.utils.LangHelper;
 import stanuwu.fragmentutils.gui.component.ComponentGroup;
 import stanuwu.fragmentutils.render.RenderHelper;
 import stanuwu.fragmentutils.render.font.TTFFontRenderer;

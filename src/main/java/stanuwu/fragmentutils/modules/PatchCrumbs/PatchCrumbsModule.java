@@ -13,7 +13,7 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
-import stanuwu.fragmentutils.Utils.PlayerHelper;
+import stanuwu.fragmentutils.utils.PlayerHelper;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 

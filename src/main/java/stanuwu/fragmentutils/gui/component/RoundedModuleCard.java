@@ -1,7 +1,7 @@
 package stanuwu.fragmentutils.gui.component;
 
 import net.minecraft.client.util.math.MatrixStack;
-import stanuwu.fragmentutils.Utils.LangHelper;
+import stanuwu.fragmentutils.utils.LangHelper;
 import stanuwu.fragmentutils.gui.Theme;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper;

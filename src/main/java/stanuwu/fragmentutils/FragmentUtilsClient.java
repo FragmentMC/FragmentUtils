@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.minecraft.client.MinecraftClient;
 import stanuwu.fragmentutils.config.FragmentUtilsConfig;
+import stanuwu.fragmentutils.donor.DonorCapes;
 import stanuwu.fragmentutils.keybinds.Keybinds;
 import stanuwu.fragmentutils.modules.Modules;
 import stanuwu.fragmentutils.render.font.Fonts;
@@ -26,6 +27,9 @@ public class FragmentUtilsClient implements ClientModInitializer {
 
         //initialize keybindings
         Keybinds.init();
+
+        //initialize cape loading
+        DonorCapes.init();
 
         //register an event for the on loaded function
         ClientLifecycleEvents.CLIENT_STARTED.register(this::onLoadedClient);

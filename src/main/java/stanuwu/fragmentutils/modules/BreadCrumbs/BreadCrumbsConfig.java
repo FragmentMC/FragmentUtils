@@ -2,7 +2,7 @@ package stanuwu.fragmentutils.modules.BreadCrumbs;
 
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.ConfigItemGroup;
-import stanuwu.fragmentutils.Utils.FloatHelper;
+import stanuwu.fragmentutils.utils.FloatHelper;
 import stanuwu.fragmentutils.config.SimpleConfigItem;
 
 import java.util.List;
