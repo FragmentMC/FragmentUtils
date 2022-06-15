@@ -52,14 +52,18 @@ public class RenderHelper3d {
         RenderSystem.enableCull();
     }
 
-    public static void renderLine(BufferBuilder bufferBuilder, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
-        final float red = color.getRed() / 255f;
-        final float green = color.getGreen() / 255f;
-        final float blue = color.getBlue() / 255f;
-        final float alpha = color.getAlpha() / 255f;
+    public static void renderLine(BufferBuilder bufferBuilder, double x1, double y1, double z1, double x2, double y2, double z2, int r, int g, int b, int a) {
+        final float red = r / 255f;
+        final float green = g / 255f;
+        final float blue = b / 255f;
+        final float alpha = a / 255f;
 
         bufferBuilder.vertex(x1, y1, z1).color(red, green, blue, alpha).next();
         bufferBuilder.vertex(x2, y2, z2).color(red, green, blue, alpha).next();
+    }
+
+    public static void renderLine(BufferBuilder bufferBuilder, double x1, double y1, double z1, double x2, double y2, double z2, Color color) {
+        renderLine(bufferBuilder, x1, y1, z1, x2, y2, z2, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
     public static void renderInfiniteQuadLines(BufferBuilder bufferBuilder, boolean x_axis, double x, double y, double z, float size, float dist, Color color) {

@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import org.lwjgl.glfw.GLFW;
 import stanuwu.fragmentutils.events.EventHandler;
@@ -14,15 +13,13 @@ import stanuwu.fragmentutils.events.events.Event;
 import stanuwu.fragmentutils.events.events.ReceivePacketEvent;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
+import stanuwu.fragmentutils.utils.DoubleHelper;
 
 import java.awt.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ExplosionBoxesModule extends Module {
-    HashMap<String, ExplosionBox> explosionBoxes = new HashMap<>();
-    HashMap<String, ExplosionBox> toAdd = new HashMap<>();
+    private ConcurrentHashMap<Long, ExplosionBox> explosionBoxes = new ConcurrentHashMap<>();
 
     float minSize = 0.1f;
     float maxSize = 1;
@@ -82,44 +79,25 @@ public class ExplosionBoxesModule extends Module {
             }
         }
         RenderHelper3d.end(bufferBuilder, context);
-        for (String key : explosionBoxes.keySet().stream().toList()) {
-            if (explosionBoxes.get(key).age > time * 20) {
-                explosionBoxes.remove(key);
-            }
-        }
-
-        int itsize = toAdd.size();
-        for (int i = 0; i < itsize; i++) {
-            String key = (String) toAdd.keySet().toArray()[i];
-            explosionBoxes.put(key, toAdd.get(key));
-            toAdd.remove(key);
-            itsize = toAdd.size();
-        }
+        explosionBoxes.keySet().removeIf(key -> explosionBoxes.get(key).age > time * 20);
     }
 
     public void receiveExplosion(Event e) {
         if (!getEnabled()) return;
 
         ReceivePacketEvent event = (ReceivePacketEvent) e;
-        if (event.getPacket() instanceof ExplosionS2CPacket) {
-            ExplosionS2CPacket ePacket = (ExplosionS2CPacket) event.getPacket();
-            Vector3d vector3d = new Vector3d(ePacket.getX(), ePacket.getY(), ePacket.getZ());
-            String key = vec3dToString(vector3d);
-
-            if (explosionBoxes.containsKey(key)) {
-                if (explosionBoxes.get(key).age != 0) {
-                    explosionBoxes.get(key).age = 0;
-                }
-            } else {
-                toAdd.put(key, new ExplosionBox(vector3d.x, vector3d.y, vector3d.z));
+        if (event.getPacket() instanceof ExplosionS2CPacket ePacket) {
+            long key = xyzToKey(ePacket.getX(), ePacket.getY(), ePacket.getZ());
+            if (explosionBoxes.putIfAbsent(key, new ExplosionBox(ePacket.getX(), ePacket.getY(), ePacket.getZ())) != null) {
+                explosionBoxes.get(key).age = 0;
             }
         }
     }
 
-    String vec3dToString(Vector3d vec3d) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.###");
-        decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-        return new String(new StringBuilder().append(decimalFormat.format(vec3d.x)).append(decimalFormat.format(vec3d.y)).append(decimalFormat.format(vec3d.z)));
+    private long xyzToKey(double x, double y, double z) {
+        return DoubleHelper.makeKeyElement(x) ^
+                DoubleHelper.makeKeyElement(y) ^
+                DoubleHelper.makeKeyElement(z);
     }
 
     public float getSize() {

@@ -41,10 +41,11 @@ public class HudModule extends Module {
     }
 
     public void render(MatrixStack poseStack) {
-        if (getEnabled() && MinecraftClient.getInstance() != null && !MinecraftClient.getInstance().options.debugEnabled)
-            hudComponents.forEach((comp) -> {
+        if (getEnabled() && MinecraftClient.getInstance() != null && !MinecraftClient.getInstance().options.debugEnabled) {
+            for (HudComponent comp : hudComponents) {
                 if (comp.isEnabled()) comp.render(poseStack);
-            });
+            }
+        }
     }
 
     public String getCustomTitle() {

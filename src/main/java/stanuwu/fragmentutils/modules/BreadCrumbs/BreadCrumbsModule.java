@@ -16,7 +16,6 @@ import org.lwjgl.glfw.GLFW;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
 
-import java.awt.*;
 import java.util.HashMap;
 
 public class BreadCrumbsModule extends Module {
@@ -35,7 +34,7 @@ public class BreadCrumbsModule extends Module {
     float sand_blue;
     float sand_alpha;
 
-    HashMap<String, BreadCrumbLine> crumbs = new HashMap<>();
+    HashMap<Long, BreadCrumbLine> crumbs = new HashMap<>();
     HashMap<Integer, Vec3d> prevPos = new HashMap<>();
 
     public BreadCrumbsModule(boolean enabled, float time, boolean tnt, boolean sand, boolean triangle, float tnt_red, float tnt_green, float tnt_blue, float tnt_alpha, float sand_red, float sand_green, float sand_blue, float sand_alpha) {
@@ -97,25 +96,39 @@ public class BreadCrumbsModule extends Module {
 
         ClientWorld clientWorld = minecraftClient.world;
         if (clientWorld != null) {
-            clientWorld.getEntities().forEach((entity -> {
+            for (Entity entity : clientWorld.getEntities()) {
                 if (entity instanceof TntEntity || entity instanceof FallingBlockEntity) {
-                    if (!prevPos.containsKey(entity.getId())) return;
+                    if (!prevPos.containsKey(entity.getId())) continue;
 
                     boolean tnt = entity instanceof TntEntity;
 
-                    if (tnt && !this.tnt) return;
-                    if (!tnt && !this.sand) return;
+                    if (tnt && !this.tnt) continue;
+                    if (!tnt && !this.sand) continue;
 
-                    Color color = tnt ?
-                            new Color((int) tnt_red, (int) tnt_green, (int) tnt_blue, (int) tnt_alpha) :
-                            new Color((int) sand_red, (int) sand_green, (int) sand_blue, (int) sand_alpha);
+                    int r;
+                    int g;
+                    int b;
+                    int a;
+
+                    if (tnt) {
+                        r = (int) tnt_red;
+                        g = (int) tnt_green;
+                        b = (int) tnt_blue;
+                        a = (int) tnt_alpha;
+                    } else {
+                        r = (int) sand_red;
+                        g = (int) sand_green;
+                        b = (int) sand_blue;
+                        a = (int) sand_alpha;
+                    }
+
                     Vec3d pos = entity.getPos();
                     Vec3d prev = prevPos.get(entity.getId());
                     Vec3d delta = pos.subtract(prev);
 
                     if (triangle) {
                         if (delta.y != 0) {
-                            addLine(new BreadCrumbLine(prev.x, prev.y, prev.z, prev.x, pos.y, prev.z, 0, color));
+                            addLine(new BreadCrumbLine(prev.x, prev.y, prev.z, prev.x, pos.y, prev.z, 0, r, g, b, a));
                         }
                         if (delta.x != 0 && delta.y != 0) {
                             boolean sure = false;
@@ -127,31 +140,31 @@ public class BreadCrumbsModule extends Module {
 
                             if (sure) {
                                 if (xSmaller) {
-                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, prev.x, pos.y, pos.z, 0, color));
-                                    addLine(new BreadCrumbLine(prev.x, pos.y, pos.z, pos.x, pos.y, pos.z, 0, color));
+                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, prev.x, pos.y, pos.z, 0, r, g, b, a));
+                                    addLine(new BreadCrumbLine(prev.x, pos.y, pos.z, pos.x, pos.y, pos.z, 0, r, g, b, a));
                                 } else {
-                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, color));
-                                    addLine(new BreadCrumbLine(pos.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, color));
+                                    addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, r, g, b, a));
+                                    addLine(new BreadCrumbLine(pos.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, r, g, b, a));
                                 }
                             } else {
-                                addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, color));
+                                addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, pos.z, 0, r, g, b, a));
                             }
                         } else if (delta.x != 0 && delta.z == 0) {
-                            addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, color));
+                            addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, pos.x, pos.y, prev.z, 0, r, g, b, a));
                         } else if (delta.x == 0 && delta.z != 0) {
-                            addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, prev.x, pos.y, pos.z, 0, color));
+                            addLine(new BreadCrumbLine(prev.x, pos.y, prev.z, prev.x, pos.y, pos.z, 0, r, g, b, a));
                             if (entity instanceof TntEntity && ((TntEntity) entity).getFuse() == 1) {
                                 entity.move(MovementType.SELF, new Vec3d(delta.x, delta.y, delta.z));
                                 double y = entity.getY() + (entity.getVelocity().y == 0 ? 0 : -0.04);
-                                addLine(new BreadCrumbLine(pos.x, pos.y, pos.z, pos.x, y, pos.z, -1, color));
-                                addLine(new BreadCrumbLine(pos.x, y, pos.z, entity.getX(), y, entity.getZ(), -1, color));
+                                addLine(new BreadCrumbLine(pos.x, pos.y, pos.z, pos.x, y, pos.z, -1, r, g, b, a));
+                                addLine(new BreadCrumbLine(pos.x, y, pos.z, entity.getX(), y, entity.getZ(), -1, r, g, b, a));
                             }
                         }
                     } else {
-                        addLine(new BreadCrumbLine(prev.x, prev.y, prev.z, pos.x, pos.y, pos.z, 0, color));
+                        addLine(new BreadCrumbLine(prev.x, prev.y, prev.z, pos.x, pos.y, pos.z, 0, r, g, b, a));
                         if (entity instanceof TntEntity && ((TntEntity) entity).getFuse() == 1) {
                             entity.move(MovementType.SELF, new Vec3d(delta.x, delta.y, delta.z));
-                            addLine(new BreadCrumbLine(pos.x, pos.y, pos.z, entity.getX(), entity.getY() + (entity.getVelocity().y == 0 ? 0 : -0.04), entity.getZ(), -1, color));
+                            addLine(new BreadCrumbLine(pos.x, pos.y, pos.z, entity.getX(), entity.getY() + (entity.getVelocity().y == 0 ? 0 : -0.04), entity.getZ(), -1, r, g, b, a));
                         }
                     }
 
@@ -161,7 +174,7 @@ public class BreadCrumbsModule extends Module {
                         prevPos.put(entity.getId(), new Vec3d(entity.getX(), entity.getY(), entity.getZ()));
                     }
                 }
-            }));
+            }
         }
 
         crumbs.values().stream().toList().forEach((crumb) -> crumb.age++);
@@ -170,7 +183,7 @@ public class BreadCrumbsModule extends Module {
     private void addLine(BreadCrumbLine line) {
         line.y1 += 0.49;
         line.y2 += 0.49;
-        String key = line.getKey();
+        long key = line.getKey();
         if (crumbs.putIfAbsent(key, line) != null) {
             crumbs.get(key).age = 0;
         }
