@@ -26,6 +26,8 @@ public class DonorCapes {
     private static final Identifier test_cape = new Identifier("fragment_utils", "cape/test_cape.png");
     private static final Identifier lightning_cape = new Identifier("fragment_utils", "cape/lightning_cape.png");
     private static final Identifier magma_cape = new Identifier("fragment_utils", "cape/magma_cape.png");
+    private static final Identifier rainbow_cape = new Identifier("fragment_utils", "cape/rainbow_cape.png");
+    private static final Identifier star_cape = new Identifier("fragment_utils", "cape/star_cape.png");
 
     public static void init() {
         loadCapes();
@@ -52,21 +54,12 @@ public class DonorCapes {
     }
 
     private static boolean allowCapeRender(AbstractClientPlayerEntity abstractClientPlayerEntity) {
-        if (CAPES.containsKey(abstractClientPlayerEntity.getUuid())) return true;
-
-        //debug
-        //return true;
-
-
-        return false;
+        return CAPES.containsKey(abstractClientPlayerEntity.getUuid());
     }
 
     private static void setDonorCape(Event e) {
         GetCapeTextureEvent event = (GetCapeTextureEvent) e;
         int capeStatus = CAPES.getOrDefault(((GetCapeTextureEvent) e).getUuid(), -1);
-
-        //debug
-        //capeStatus = 1;
 
         switch (capeStatus) {
             case 0:
@@ -76,8 +69,10 @@ public class DonorCapes {
                 event.setTexture(magma_cape);
                 break;
             case 2:
+                event.setTexture(rainbow_cape);
                 break;
             case 3:
+                event.setTexture(star_cape);
                 break;
             case 69:
                 event.setTexture(test_cape);
