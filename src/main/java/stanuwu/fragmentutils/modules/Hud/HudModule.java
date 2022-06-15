@@ -42,9 +42,13 @@ public class HudModule extends Module {
 
     public void render(MatrixStack poseStack) {
         if (getEnabled() && MinecraftClient.getInstance() != null && !MinecraftClient.getInstance().options.debugEnabled) {
+            poseStack.push();
+            float scale = (float) (2.0 / MinecraftClient.getInstance().getWindow().getScaleFactor());
+            poseStack.scale(scale, scale, 1);
             for (HudComponent comp : hudComponents) {
                 if (comp.isEnabled()) comp.render(poseStack);
             }
+            poseStack.pop();
         }
     }
 
