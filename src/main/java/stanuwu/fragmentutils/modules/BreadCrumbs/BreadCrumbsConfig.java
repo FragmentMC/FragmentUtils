@@ -2,8 +2,8 @@ package stanuwu.fragmentutils.modules.BreadCrumbs;
 
 import com.oroarmor.config.ConfigItem;
 import com.oroarmor.config.ConfigItemGroup;
-import stanuwu.fragmentutils.utils.FloatHelper;
 import stanuwu.fragmentutils.config.SimpleConfigItem;
+import stanuwu.fragmentutils.utils.FloatHelper;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class BreadCrumbsConfig extends ConfigItemGroup {
     public static final ConfigItem<Integer> tnt_red = new SimpleConfigItem<>("color.tnt.red", 0);
     public static final ConfigItem<Integer> tnt_green = new SimpleConfigItem<>("color.tnt.green", 255);
     public static final ConfigItem<Integer> tnt_blue = new SimpleConfigItem<>("color.tnt.blue", 255);
-    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("color.tnt.alpha", 125);
+    public static final ConfigItem<Integer> tnt_alpha = new SimpleConfigItem<>("color.tnt.alpha", 255);
     public static final ConfigItem<Integer> sand_red = new SimpleConfigItem<>("color.sand.red", 255);
     public static final ConfigItem<Integer> sand_green = new SimpleConfigItem<>("color.sand.green", 255);
     public static final ConfigItem<Integer> sand_blue = new SimpleConfigItem<>("color.sand.blue", 0);
