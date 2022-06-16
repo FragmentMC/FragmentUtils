@@ -37,10 +37,10 @@ public class BreadCrumbLine {
 
     public long getKey() {
         return DoubleHelper.makeKeyElement(x1) ^
-                DoubleHelper.makeKeyElement(y1) ^
-                DoubleHelper.makeKeyElement(z1) ^
-                DoubleHelper.makeKeyElement(x2) ^
-                DoubleHelper.makeKeyElement(y2) ^
-                DoubleHelper.makeKeyElement(z2);
+                DoubleHelper.makeKeyElement(y1) << 1 ^
+                DoubleHelper.makeKeyElement(z1) << 2 ^
+                DoubleHelper.makeKeyElement(x2) << 3 ^
+                DoubleHelper.makeKeyElement(y2) << 5 ^
+                DoubleHelper.makeKeyElement(z2) << 6;
     }
 }
