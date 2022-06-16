@@ -45,11 +45,7 @@ Support Me
 If you have some spare money and like what I made, I would appreciate it if you left me a few bucks. I spent a hours on
 end making this mod and it is important to me not to lock any features behind a paywall.
 
-<form action="https://www.paypal.com/donate" method="post" target="_top">
-<input type="hidden" name="hosted_button_id" value="U2BQSBBVGK6RA" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_AT/i/scr/pixel.gif" width="1" height="1" />
-</form>
+[![Donate Button](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=U2BQSBBVGK6RA)
 
 ### Capes
 
@@ -63,7 +59,7 @@ to be eligible is 5USD (at once) to prevent spam.
 
 > Already Donated? Open a ticket in the [discord](http://fragmentmc.xyz) and you will get your cape as soon as possible.
 
-![Cape Banner](./images/cape_banner.png)
+![Cape Banner](images/cape_banner.png)
 
 Contributing
 -----
