@@ -45,7 +45,7 @@ Support Me
 If you have some spare money and like what I made, I would appreciate it if you left me a few bucks. I spent a hours on
 end making this mod and it is important to me not to lock any features behind a paywall.
 
-[![Donate Button](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=U2BQSBBVGK6RA)
+[<img src="https://raw.githubusercontent.com/aha999/DonateButtons/master/Paypal.png" width="250">](https://www.paypal.com/donate/?hosted_button_id=U2BQSBBVGK6RA)
 
 ### Capes
 
