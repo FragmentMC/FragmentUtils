@@ -24,6 +24,9 @@ Features
 Installing
 -----
 
+Download the [latest release](https://github.com/FragmentMC/FragmentUtils/releases/latest) and put it in your mods
+folder.
+
 ### Requirements
 
 - Minecraft 1.18.2
