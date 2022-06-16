@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AbstractFileResourcePackMixin {
     @Inject(method = "contains", at = @At(value = "HEAD"), cancellable = true)
     private void preventArmorShaderLoading(ResourceType type, Identifier id, CallbackInfoReturnable<Boolean> cir) {
-        if (!((AbstractFileResourcePack) (Object) this).getName().contains(".jar") && id.getPath().contains("rendertype_armor_cutout_no_cull")) {
+        if (!((AbstractFileResourcePack) (Object) this).getName().endsWith(".jar") && id.getPath().contains("rendertype_armor_cutout_no_cull")) {
             cir.setReturnValue(false);
             cir.cancel();
         }
