@@ -4,6 +4,7 @@
   "package": "stanuwu.fragmentutils.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "AbstractFileResourcePackMixin",
     "ClientConnectionPacketMixin",
     "InGameHudRenderMixin",
     "PlayerGetCapeTextureMixin"
