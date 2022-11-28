@@ -33,8 +33,7 @@ public class RenderHelper {
     }
 
     public static void end(BufferBuilder bufferbuilder) {
-        bufferbuilder.end();
-        BufferRenderer.draw(bufferbuilder);
+        BufferRenderer.drawWithShader(bufferbuilder.end());
         RenderSystem.disableBlend();
         RenderSystem.enableTexture();
     }
@@ -135,8 +134,7 @@ public class RenderHelper {
         bufferBuilder.vertex(matrix, x + 256, y + 256, 0).texture(1, 1).next();
         bufferBuilder.vertex(matrix, x + 256, y, 0).texture(1, 0).next();
         bufferBuilder.vertex(matrix, x, y, 0).texture(0, 0).next();
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
         RenderSystem.disableTexture();
         RenderSystem.disableBlend();
         poseStack.pop();

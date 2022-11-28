@@ -342,8 +342,7 @@ public class TTFFontRenderer {
                 .texture(0, 0)
                 .color(this.color.getRGB())
                 .next();
-        bufferbuilder.end();
-        BufferRenderer.draw(bufferbuilder);
+        BufferRenderer.drawWithShader(bufferbuilder.end());
     }
 
     private void drawLine(final Vector2f start, final Vector2f end, final float width) {

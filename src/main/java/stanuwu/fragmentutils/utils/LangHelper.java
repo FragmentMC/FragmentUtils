@@ -1,9 +1,6 @@
 package stanuwu.fragmentutils.utils;
 
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 
 import java.util.Optional;
@@ -11,20 +8,20 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class LangHelper {
     public static String getTranslated(String key) {
-        return getString(new TranslatableText(key));
+        return getString(MutableText.of(new TranslatableTextContent(key)));
     }
 
-    public static String getString(TranslatableText otext) {
+    public static String getString(MutableText otext) {
         AtomicReference<String> text = new AtomicReference<>("");
-        otext.visitSelf((visitor) -> {
+        otext.visit((visitor) -> {
             text.set(visitor);
             return Optional.of(visitor);
         });
         return text.get();
     }
 
-    public static TranslatableText toggleMessageText(String module, boolean toggle) {
-        return new TranslatableText("toggle.fragment_utils.message", module, booleanColorText(getTranslated("toggle.fragment_utils." + toggle), toggle));
+    public static MutableText toggleMessageText(String module, boolean toggle) {
+        return MutableText.of(new LiteralTextContent(String.format(getTranslated("toggle.fragment_utils.message"), module, toggle)));
     }
 
     public static String toggleMessage(String module, boolean toggle) {
@@ -32,6 +29,6 @@ public class LangHelper {
     }
 
     public static Text booleanColorText(String text, boolean color) {
-        return new LiteralText(text).setStyle(Style.EMPTY.withColor(color ? Formatting.GREEN : Formatting.RED));
+        return MutableText.of(new LiteralTextContent(text)).setStyle(Style.EMPTY.withColor(color ? Formatting.GREEN : Formatting.RED));
     }
 }

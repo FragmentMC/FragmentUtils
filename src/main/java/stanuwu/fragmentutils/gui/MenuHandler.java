@@ -1,7 +1,8 @@
 package stanuwu.fragmentutils.gui;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.TranslatableTextContent;
 
 public class MenuHandler {
     static MinecraftClient client = MinecraftClient.getInstance();
@@ -15,6 +16,6 @@ public class MenuHandler {
     }
 
     public static void openMenu() {
-        client.setScreen(new SelectScreen(new TranslatableText("screen.fragment_utils.menu")));
+        client.setScreen(new SelectScreen(MutableText.of(new TranslatableTextContent("screen.fragment_utils.menu"))));
     }
 }

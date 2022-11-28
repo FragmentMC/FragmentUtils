@@ -1,8 +1,9 @@
 package stanuwu.fragmentutils.gui;
 
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import stanuwu.fragmentutils.gui.component.RoundedBiModuleCard;
 import stanuwu.fragmentutils.gui.component.RoundedModuleCard;
 import stanuwu.fragmentutils.modules.Hud.HudEditScreen;
@@ -15,7 +16,7 @@ public class SelectScreen extends MenuScreen {
         components.add(new RoundedModuleCard(-70, -35, Modules.getModule("explosionboxes")));
         components.add(new RoundedModuleCard(70, -35, Modules.getModule("patchcrumbs")));
         components.add(new RoundedModuleCard(-70, 35, Modules.getModule("breadcrumbs")));
-        components.add(new RoundedBiModuleCard(70, 35, Modules.getModule("hud"), new HudEditScreen(new TranslatableText("screen.fragment_utils.hud_editor")), "button.fragment_utils.edit"));
+        components.add(new RoundedBiModuleCard(70, 35, Modules.getModule("hud"), new HudEditScreen(MutableText.of(new TranslatableTextContent("screen.fragment_utils.hud_editor"))), "button.fragment_utils.edit"));
     }
 
     @Override

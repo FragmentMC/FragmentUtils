@@ -11,9 +11,9 @@
   "icon": "assets/fragment_utils/icon.png",
   "environment": "client",
   "depends": {
-    "fabricloader": ">=0.14.6",
+    "fabricloader": ">=0.14.10",
     "fabric": "*",
-    "minecraft": "1.18.2",
+    "minecraft": "1.19.2",
     "fabric-key-binding-api-v1": "*"
   },
   "entrypoints": {

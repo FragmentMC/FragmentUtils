@@ -1,7 +1,7 @@
 Fragment Utils
 ===========
 
-Free and open source Factions mod for 1.18.2 made by stan. Join the [discord](http://fragmentmc.xyz)!
+Free and open source Factions mod for 1.19.2 made by stan. Join the [discord](http://fragmentmc.xyz)!
 
 Features
 -----
@@ -29,11 +29,11 @@ folder.
 
 ### Requirements
 
-- Minecraft 1.18.2
+- Minecraft 1.19.2
 - [Fabric Mod Loader](https://fabricmc.net/use/installer/)
 - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
-> Note: If you want to join server that are not on version 1.18.2 I currently recommend using [ViaFabric](https://www.curseforge.com/minecraft/mc-mods/viafabric).
+> Note: If you want to join server that are not on version 1.19.2 I currently recommend using [ViaFabric](https://www.curseforge.com/minecraft/mc-mods/viafabric).
 
 ### Compatibility
 

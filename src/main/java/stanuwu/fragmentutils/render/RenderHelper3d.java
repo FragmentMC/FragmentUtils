@@ -26,9 +26,9 @@ public class RenderHelper3d {
     }
 
     public static void end(BufferBuilder bufferBuilder, WorldRenderContext context) {
-        bufferBuilder.end();
         VertexBuffer vertexBuffer = new VertexBuffer();
-        vertexBuffer.upload(bufferBuilder);
+        vertexBuffer.bind();
+        vertexBuffer.upload(bufferBuilder.end());
         Camera camera = context.camera();
         Vec3d cameraPos = camera.getPos();
 
@@ -44,7 +44,7 @@ public class RenderHelper3d {
         RenderSystem.applyModelViewMatrix();
 
         RenderSystem.depthFunc(GL11.GL_ALWAYS);
-        vertexBuffer.setShader(poseStack.peek().getPositionMatrix(), context.projectionMatrix().copy(), GameRenderer.getPositionColorShader());
+        vertexBuffer.draw(poseStack.peek().getPositionMatrix(), context.projectionMatrix().copy(), GameRenderer.getPositionColorShader());
         RenderSystem.depthFunc(GL11.GL_LEQUAL);
 
         poseStack.pop();

@@ -13,9 +13,9 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
-import stanuwu.fragmentutils.utils.PlayerHelper;
 import stanuwu.fragmentutils.modules.Module;
 import stanuwu.fragmentutils.render.RenderHelper3d;
+import stanuwu.fragmentutils.utils.PlayerHelper;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -76,7 +76,7 @@ public class PatchCrumbsModule extends Module {
 
         if (crumbs_pos != null && crumbs_age <= time * 20) {
             BufferBuilder bufferBuilder = RenderHelper3d.startLines();
-            float dist = MinecraftClient.getInstance().options.viewDistance * 16;
+            float dist = MinecraftClient.getInstance().options.getViewDistance().getValue() * 16;
             Color color = new Color((int) red, (int) green, (int) blue, (int) alpha);
             if (path) {
                 RenderHelper3d.renderInfiniteQuadLines(bufferBuilder, crumbs_x, crumbs_pos.x - size / 2, Math.round(crumbs_pos.y + y_offset) + size / 2 + 0.5, crumbs_pos.z + size / 2, size, dist, color);

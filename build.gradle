@@ -16,13 +16,13 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "com.oroarmor:oro-config-fabric:2.1.0"
-    include "com.oroarmor:oro-config-fabric:2.1.0"
+    modImplementation 'com.oroarmor:oro-config-fabric:2.1.0'
+    include 'com.oroarmor:oro-config-fabric:3.1.0'
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10'
 }
 
 processResources {
